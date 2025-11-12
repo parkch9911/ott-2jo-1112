@@ -13,6 +13,7 @@ import Test from './pages/Test.jsx'
 import SearchProvider from './context/SearchContext.jsx'
 import WishProvider from './context/WishContext.jsx'
 import InputPage from './pages/inputPage/InputPage.jsx'
+import Recommand from './pages/recommand/Recommand.jsx'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/search" element={<InputPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/movie" element={<Movie />} />
+        <Route path="/reco" element={<Recommand />} />
         <Route path="/test" element={<Test />} />
         <Route path="/selectProfile" element={<SelectProfile />} />
         <Route path='/detail/:id' element={<Detail />} />

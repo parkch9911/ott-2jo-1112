@@ -36,7 +36,7 @@ export default function Header() {
                     <Link to='/home'>홈</Link>
                     <a href="#">시리즈</a>
                     <Link to='/movie'>영화</Link>
-                    <a href="#">NEW! 요즘 대세 콘텐츠</a>
+                    <Link to='/reco'>NEW! 요즘 대세 콘텐츠</Link>
                     <Link to='/test'>내가 찜한 리스트</Link>
                     </nav>
                 </div>
