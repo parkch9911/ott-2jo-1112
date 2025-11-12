@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*  */
+body{
+    position: relative;
+    overflow-x: hidden;
+}
+/* -================로그인페이지 css */
+.loglogo{
+    margin: 0;
+}
+.background-img{
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1000px;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), 
+    url('../../public/img/backg.jpg') center/cover no-repeat;
+}
+.toplogo{
+    position: absolute;
+    top: 0;
+    left: 300px;
+    width: 200px;
+    margin-top: 30px;
+}
+.login-form{
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgb(29, 29, 29);
+    padding: 50px;
+    width: 452px;
+    border-radius: 10px;
+    height: 780px;
+    text-align: center;
+
+}
+.logo {
+  height: 6em;
+  padding: 1.5em;
+}
+.login-form h1{
+    text-align: left;
+    color: white;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+.login-form input{
+    width: 352px;
+    height: 56px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    font-size: 18px;
+    outline: none;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.login-form button{
+    width: 352px;
+}
+.login-form .login-btn{
+    background-color: red;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+}
+.login-form .login-btn:hover{
+    border: none;
+    background-color: rgb(151, 25, 25);
+}
+.login-form p{
+    color: rgb(187, 187, 187);
+    font-weight: bold;
+    margin: 15px 0;
+}
+.login-form .usecode{
+    border: none;
+}
+.login-form .usecode:hover{
+    background-color: rgb(199, 199, 199);
+}
+.lost-pw{
+    color: white;
+    text-decoration: underline;
+    display: inline-block;
+    margin: 20px 0;
+}
+.lost-pw:hover{
+    color: rgb(180, 180, 180);
+}
+.check-box{
+    display: flex;
+}
+.login-form-bottom .checking{
+    width: 20px;
+    margin-right: 10px;
+}
+.login-form-bottom .save-log{
+    color: white;
+}
+.login-form-bottom span{
+    color: rgb(170, 170, 170);
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+.login-form-bottom em{
+    color: white;
+    font-weight: bold;
+}
+.login-form-bottom .dep{
+    font-size: 12px;
+    color: gray;
+}
+.login-form-bottom .todetail{
+    color: dodgerblue;
+    text-decoration: underline;
+    font-size: 13px;
+    margin-right: 250px;
+}
+/* ==========================footer */

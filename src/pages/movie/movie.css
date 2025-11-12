@@ -1,0 +1,124 @@
+.main-container{
+    width: 100%;
+    padding-bottom: 150px;
+    overflow: hidden;
+    color: #fff;
+    background-color: #000;
+}
+.category .btns{
+    color: #fff;
+    line-height: 50px;
+    border-bottom: 1px solid #ddd;
+    border-top: 2px solid #515151;
+    font-size: 14px;
+    padding: 0 10px;
+    margin-top: 5px;
+}
+.category .btns button{
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    padding: 0 0 0 15px;
+    color: #fff;
+    cursor: pointer;
+}
+.category .btns button:first-child{
+    padding-left: 0;
+}
+.category .btns button:hover{
+    border: 0;
+}
+.category .btns select{
+    cursor: pointer;
+}
+.category .btns label{
+    padding: 0 5px 0 0;
+}
+.category .btns #country{
+    margin-right: 15px;
+}
+.content-wrap{
+    padding: 0 50px;
+    position: relative;
+}
+.content-wrap h4{
+    font-size: 32px;
+    margin-bottom: 15px;
+    margin-top: 40px;
+}
+
+.content-wrap ul{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 22px;
+}
+.content-wrap ul li{
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 12.9%;
+}
+.content-wrap ul li .popNum{
+    color: #fff;
+    font-size: 70px;
+    font-weight: 900;
+    font-style: italic;
+    position: relative;
+    z-index: 9;
+    line-height: 0.7;
+    text-shadow: 5px 5px 5px #252525;
+}
+.content-wrap ul li img{
+    width: 100%;
+    height: 100%;
+}
+.content-wrap ul li img.popimg{
+    border-radius: 8px;
+    display: block;
+    margin-top:-45px   
+}
+
+.content-wrap .left-arrow:before{
+    content: "\276E";
+}
+.content-wrap .right-arrow:before{
+    content: "\276F";
+}
+.content-wrap .left-arrow{
+    left: 11px;
+}
+.content-wrap .right-arrow{
+    right: 11px;
+}
+.content-wrap .left-arrow,
+.content-wrap .right-arrow{
+    position: absolute;
+    cursor: pointer;
+    font-size: 55px;
+    top: 50%;
+    transform: translateY(-25%);
+    text-shadow: 5px 5px 5px #252525;
+}
+.content-wrap .left-arrow:hover,
+.content-wrap .right-arrow:hover{
+    opacity: 0.8;
+}
+
+.content2 {
+    float: left;
+    width: 50%;
+    overflow-x: hidden;
+}
+.content2 .content-wrap{
+    /* padding: 0 25px; */
+}
+
+.content2 .content-wrap ul{
+    width: 100%;
+    gap: 2.5%;
+}
+.content2 .content-wrap ul li{
+    width: 33.3%;
+}
