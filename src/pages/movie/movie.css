@@ -5,6 +5,58 @@
     color: #fff;
     background-color: #000;
 }
+.main-container .bg-color{
+    position: absolute;
+    top: 67px;
+    left: 0;
+    right: 0;
+    height: 600px;
+    background: -moz-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
+    background: -webkit-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
+    background: -o-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
+    background: -ms-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
+    background: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
+}
+.main-container .bg-color .info-wrap{
+    position: absolute;
+    left: 6%;
+    bottom: 125px;
+}
+.main-container .bg-color .info-wrap h2{
+    font-size: 40px;
+    margin: 0;
+}
+.main-container .bg-color .info-wrap p{
+    width: 678px;
+    height: 90px;
+    overflow-y: hidden;
+}
+.main-container .bg-color .info-wrap button{
+    border-radius: 5px;
+    width: 150px;
+    line-height: 38px;
+    font-size: 20px;
+    font-weight: 600;
+    border: 0;
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+.main-container .bg-color .info-wrap button:hover{
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.main-container .banner-wrap{
+    position: relative;
+}
+.main-container .main-banner{
+    background-image: url('/public/img/main_bg.jpg');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
 .category .btns{
     color: #fff;
     line-height: 50px;
@@ -80,20 +132,20 @@
     margin-top:-45px   
 }
 
-.content-wrap .left-arrow:before{
+.main-info .left-arrow:before{
     content: "\276E";
 }
-.content-wrap .right-arrow:before{
+.main-info .right-arrow:before{
     content: "\276F";
 }
-.content-wrap .left-arrow{
+.main-info .left-arrow{
     left: 11px;
 }
-.content-wrap .right-arrow{
+.main-info .right-arrow{
     right: 11px;
 }
-.content-wrap .left-arrow,
-.content-wrap .right-arrow{
+.main-info .left-arrow,
+.main-info .right-arrow{
     position: absolute;
     cursor: pointer;
     font-size: 55px;
@@ -101,8 +153,8 @@
     transform: translateY(-25%);
     text-shadow: 5px 5px 5px #252525;
 }
-.content-wrap .left-arrow:hover,
-.content-wrap .right-arrow:hover{
+.main-info .left-arrow:hover,
+.main-info .right-arrow:hover{
     opacity: 0.8;
 }
 
