@@ -5,7 +5,6 @@ import { useEffect } from "react";
 export const LoginContext = createContext();
 
 export default function LoginProvider({children}){
-
     const[ user, setUser]= useState(null)
     
     //로그인 함수
@@ -57,6 +56,8 @@ export default function LoginProvider({children}){
         setUser2(false)
         setUser3(true)
     }
+
+
 
     return(
         <LoginContext.Provider value={{login,logout,user1click,user2click,user3click,user1,user2,user3}}>

@@ -40,7 +40,7 @@ body{
     padding: 50px;
     width: 452px;
     border-radius: 10px;
-    height: 780px;
+    height: 800px;
     text-align: center;
 
 }
@@ -75,6 +75,8 @@ body{
     font-size: 17px;
     font-weight: bold;
     border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
 }
 .login-form .login-btn:hover{
     border: none;
@@ -87,6 +89,10 @@ body{
 }
 .login-form .usecode{
     border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: 600;
 }
 .login-form .usecode:hover{
     background-color: rgb(199, 199, 199);

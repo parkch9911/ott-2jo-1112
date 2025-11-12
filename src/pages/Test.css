@@ -1,0 +1,53 @@
+
+.wish-page{
+    margin: 100px auto;
+    width: 1400px
+}
+.wish-head{
+    margin: 0;
+    margin-bottom: 20px;
+
+}
+.wish-lists{
+    width: 1400px;
+    background-color: #181818;
+    margin: 0 auto;
+    display: flex;
+    padding: 25px;
+    gap: 9px;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+.wish-item{
+    margin-bottom: 20px;
+}
+.wish-lists img{
+    border-radius: 10px;
+    width: 330px;
+}
+.wish-item a img{
+    transition: transform 0.3s ease;
+}
+.wish-item a img:hover {
+    transform: scale(1.05);
+}
+.wish-btn{
+    width: 1400px;
+    text-align: center;
+    margin-top: 50px;
+}
+.wish-btn button{
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+.wish-btn button:hover{
+    background-color: rgb(146, 17, 17);
+}
+.wish-noItem{
+    color: rgb(139, 139, 139);
+    margin: 20px auto;
+}

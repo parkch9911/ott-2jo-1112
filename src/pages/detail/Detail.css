@@ -12,11 +12,10 @@
     width: 800px;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
-    padding: 60px 30px;
-
+    padding: 60px;
 }
 .moviezone img{
-    margin-left: 120px;
+    margin-left: 90px;
     width: 500px;
     border-radius: 10px;
     margin-bottom: 30px;
@@ -28,6 +27,74 @@
     background-color: rgba(200, 200, 200, 0.1);
     border-radius: 10px;
 }
+.movie-box-top{
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+.wishaddzone{
+    text-align: right;
+}
+.wishaddzone p{
+    margin-top: 5px;
+    margin-right: 100px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: gray;
+}
+.wishaddzone button{
+    margin-right: 125px;
+    cursor: pointer;
+    background-color: transparent;
+    color: gray;
+    font-size: 20px;
+    border: none;
+    margin-bottom: 0;
+}
+.detail-title{
+    color: #b3b3b3;
+    font-size: 20px;
+    width: 350px;
+    margin-left: 90px;
+}
+.movie-box-middle{
+    display: flex;
+    justify-content: space-between;
+}
+.movie-box-middle p{
+    width: 400px;
+    font-size: 14px;
+    margin-left: 90px;
+}
+.movie-box-middle button{
+    margin-right: 90px;
+    padding: 10px 13px;
+    margin-bottom: 20px;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.movie-box-middle button:hover{
+    background-color: rgb(131, 17, 17);
+}
+.movie-detail .detail-1{
+    color: #cfcfcf;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.movie-detail .detail-1-con{
+    color: rgb(158, 158, 158);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+
+
+/* 뒤로가기 버튼 */
+.detail-backBtn-box{
+    text-align: center;
+}
 .backBtn{
-    padding: 10px;
+    padding: 10px 13px;
 }
