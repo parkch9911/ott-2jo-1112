@@ -168,7 +168,7 @@ export default function Header() {
                             <p><i className="fa-solid fa-user"></i> 프로필 관리</p>
                             <p><i className="fa-solid fa-user-gear"></i> 계정 관리</p>
                             <p><i className="fa-solid fa-headset"></i> 고객센터</p>
-                            <p><Link to='/' className="logout" onClick={logout}><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</Link></p>
+                            <p><Link to='/' className="logout" onClick={logout}><i className="fa-solid fa-right-from-bracket"></i> 로그아웃</Link></p>
                         </div>
                         )}
                     </div>

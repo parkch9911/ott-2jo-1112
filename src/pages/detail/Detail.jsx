@@ -43,29 +43,35 @@ const item = movies.find((item)=>item.id === Number(id))
                         <img  src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                               alt={item.title || item.name}/>
                         <div className="movie-box-top">
-                            <h2>{item.title || item.name}</h2>
-                            {user1?
-                            <button className="wishbtn" onClick={()=>{isinwish1(item.id)?removewish1(item.id):addwish1(item)}}>{isinwish1(item.id)?'❤️':'🤍'}</button>
-                            :user2?
-                            <button className="wishbtn" onClick={()=>{isinwish2(item.id)?removewish2(item.id):addwish2(item)}}>{isinwish2(item.id)?'❤️':'🤍'}</button>
-                            :user3?
-                            <button className="wishbtn" onClick={()=>{isinwish3(item.id)?removewish3(item.id):addwish3(item)}}>{isinwish3(item.id)?'❤️':'🤍'}</button>
-                            :null}
-                            
+                            <h2 className="detail-title">{item.title || item.name}</h2>
+                            <div className="wishaddzone">
+                                {user1?
+                                <button className="wishbtn" onClick={()=>{isinwish1(item.id)?removewish1(item.id):addwish1(item)}}>{isinwish1(item.id)?<i className="fa-solid fa-check"></i>:<i class="fa-solid fa-plus"></i>}</button>
+                                :user2?
+                                <button className="wishbtn" onClick={()=>{isinwish2(item.id)?removewish2(item.id):addwish2(item)}}>{isinwish2(item.id)?<i className="fa-solid fa-check"></i>:<i class="fa-solid fa-plus"></i>}</button>
+                                :user3?
+                                <button className="wishbtn" onClick={()=>{isinwish3(item.id)?removewish3(item.id):addwish3(item)}}>{isinwish3(item.id)?<i className="fa-solid fa-check"></i>:<i class="fa-solid fa-plus"></i>}</button>
+                                :null}
+                                <p className="wishbtn-text">찜한 콘텐츠</p>
+                            </div>
                         </div>
                         <div className="movie-box-middle">
-                            <p><i class="fa-solid fa-star"></i>{item.vote_average}({item.vote_count}) (영화장르)개봉일자 : {item.release_date}</p>
+                            <p><i className="fa-solid fa-star"></i>{item.vote_average}({item.vote_count}) (영화장르)개봉일자 :{item.first_air_date || item.release_date}</p>
+                            <button type="button" className="playMovie">▶︎ 재생하기</button>
                         </div>
-                        <button type="button" className="playMovie">재생하기</button>
+                        <hr/>
+                        
                     </div>
                     <div className="movie-detail">
-                        <p>시놉시스</p>
-                        <span>{item.overview}</span>
+                        <p className="detail-1">시놉시스</p>
+                        <span className="detail-1-con">{item.overview}</span>
                         <hr/>
                         <p>장르</p>
                         <span>해당 영화 장르 출력예정</span>
                     </div>
-                    <button className="backBtn" onClick={()=>navi(-1)}>뒤로가기</button>
+                    <div className="detail-backBtn-box">
+                        <button className="backBtn" onClick={()=>navi(-1)}>뒤로가기</button>
+                    </div>
                 </div>
                 <div className="another-movie">
                     <p>다른 작품</p>
