@@ -3,11 +3,11 @@ import { Routes, Route } from 'react-router-dom'
 import LoginProvider from './context/LoginContext.jsx'
 import SelectProfile from "./pages/selectProfile/SelectProfile.jsx"
 import Footer from './common/Footer.jsx'
-import Detail from './pages/Detail/Detail.jsx'
+import Detail from './pages/detail/Detail.jsx'
 import DataProvider from './context/DataContext.jsx'
 import Header from './common/Header.jsx'
 import Home from './pages/home/Home.jsx'
-import Movie from './pages/movie/Movie.jsx'
+import Movie from './pages/movie/movie.jsx'
 /// 테스트용
 import Test from './pages/Test.jsx'
 import SearchProvider from './context/SearchContext.jsx'

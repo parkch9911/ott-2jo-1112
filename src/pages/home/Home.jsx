@@ -1,16 +1,18 @@
 import { useState,useEffect,useContext } from "react";
-import { WishContext } from "../../context/WishContext";
 import { Link } from "react-router-dom";
 import './Home.css'
 import { fetchAll } from "../../context/useFetch"
 import { LoginContext } from "../../context/LoginContext";
+import { WishContext } from "../../context/WishContext";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 
 
 
 export default function Home(){
-    //유저정보 불러오기
-    const{wishMovies1,wishMovies2,wishMovies3} = useContext(WishContext);
-    const{user1,user2,user3} = useContext(LoginContext);
+
+    
     //영화 전체 DB 불러오기
     const [movies, setMovies] = useState([]);
 
@@ -20,13 +22,26 @@ export default function Home(){
     useEffect(() => {
         fetchAll()
         .then((data) => {
-            setMovies(data);
+            const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1523160);
+            setMovies(data2);
             setCurrent2(0);
         })
         .catch((err) => {
             console.error("전체 영화 불러오기 실패:", err);
         });
     }, []);
+
+
+        const{id} = useParams()
+    // 전에는 JSON에서 보내온 전체의 배열 중 find를 썼는데 이번엔 fetchAll 이용해서 아이디 일치하는거 찾아야함
+    const item = [...movies].find((item)=>item.id === Number(id))
+
+    const navi=useNavigate();
+    const {user1,user2,user3}=useContext(LoginContext);
+    const {addwish1,isinwish1,removewish1,
+            addwish2,isinwish2,removewish2,
+            addwish3,isinwish3,removewish3,wishMovies1,wishMovies2,wishMovies3} =useContext(WishContext);
+
     
     const today = new Date();
     //인기작
@@ -55,7 +70,7 @@ export default function Home(){
 
 
     //슬라이드 인덱스
-    const[current, setCurrent] = useState([0,0,0,0,0,0,0,0,0]);
+    const[current, setCurrent] = useState([0,0,0,0,0,0,0]);
     //메인배너 슬라이드 인덱스
     const[current2, setCurrent2] = useState(0);
 
@@ -75,8 +90,8 @@ export default function Home(){
     const rightClick = (i)=>{
         const copy = [...current];
         
-        if(copy[i] === 2){
-            copy[i] === 2;
+        if(copy[i] === ((i == 0 || i == 1) ? 2 : (i == 2 || i == 3) ? 3 : (i == 4) ? 1 : 1)){
+            copy[i] === ((i == 0 || i == 1) ? 2 : (i == 2 || i == 3) ? 3 : (i == 4) ? 1 : 1);
         }else{
             copy[i] = copy[i] + 1;
         }
@@ -149,20 +164,48 @@ export default function Home(){
                         <div className="contents-wrap">
                             <h4>{mov==popular ? '인기작 TOP 20' : mov==now ? '현재 상영작' : mov==vote ? '높은 평점순' : mov==us ? '헐리웃 영화' : mov==jjim ? '내가 찜한 영화' : ''}</h4>
                             {/* 30%씩 슬라이드 이동 */}
-                            <ul style={{transform: mov == popular || mov==now ? `translateX(-${(current[index] * 100)/3.33}%)` : `translateX(-${(current[index] * 100)/2.67}%)`  }} className={mov == popular || mov==now ? 'popul' : ''}>
+                            <ul style={{transform: mov == popular || mov==now ? `translateX(-${(current[index] * 100)/3.33}%)` : `translateX(-${current[index] * 1823}px)`  }} className={mov == popular || mov==now ? 'popul' : 'garo'}>
                                 {mov.slice(0,20).map((item,i)=> item.length !== 0 ?(
                                     <li key={item.id}>
-                                        <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
+                                        
                                             {mov==popular ? <span className="popNum">{i+1}</span> : ''}
                                             {mov==popular ||  mov==now ? (<img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} className={mov == popular ? 'popimg' : ''}/>)
-                                            : (<img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />)}         
-                                        </Link>
-                                        {item.release_date}{item.vote_average}{item.origin_country}{item.popularity}
+                                            : (<img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />)}
+                                            {mov==vote || mov==us || mov==jjim ? <p className="title">{item.name || item.title}</p> : null }      
+                                        
+                                            <div className="black">
+                                                <button type="button" onClick={()=>
+                                                {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                    {user1 ? (
+                                                        isinwish1(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : user2 ? (
+                                                        isinwish2(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : user3 ? (
+                                                        isinwish3(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : null}
+                                                    <p>찜하기</p>
+                                                </button>
+                                                <Link to={`/detail/${item.id}`}>
+                                                    <i className="fa-solid fa-circle-info"></i>
+                                                    <p>상세정보</p>
+                                                </Link>
+                                            </div>
                                     </li>
                                 ): null)}
                             </ul>
-                            <div className="left-arrow" onClick={()=>leftClick(index)}></div>
-                            <div className="right-arrow" onClick={()=>rightClick(index)}></div>
+                            { mov.length <= 5 ? null :
+                                <>
+                                  <div className="left-arrow" onClick={()=>leftClick(index)}></div>
+                                  <div className="right-arrow" onClick={()=>rightClick(index)}></div>
+                                </>
+                            }
                         </div>
                     ):null}                  
                 </div>
@@ -171,18 +214,42 @@ export default function Home(){
                     <div className="contents-wrap">
                         <h4>{mov==ani ? '애니메이션' : mov==kor ? '한국영화' : ''}</h4>
                         {/* 30%씩 슬라이드 이동 */}
-                        <ul>
-                            {mov.slice(0,3).map((item,index)=>(
+                        <ul style={{transform:`translateX(-${current[index] * 51}%)`}}>
+                            {mov.slice(0,6).map((item,index)=>(
                                 <li key={item.id}>
-                                    <Link to={`/detail/${item.id}`}>
-                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
-                                    </Link>
+                                    
+                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                    
+                                    <div className="black">
+                                        <button type="button" onClick={()=>
+                                        {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                        :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                            {user1 ? (
+                                                isinwish1(item.id)
+                                                ? <i className="fa-solid fa-check"></i>
+                                                : <i className="fa-solid fa-plus"></i>
+                                            ) : user2 ? (
+                                                isinwish2(item.id)
+                                                ? <i className="fa-solid fa-check"></i>
+                                                : <i className="fa-solid fa-plus"></i>
+                                            ) : user3 ? (
+                                                isinwish1(item.id)
+                                                ? <i className="fa-solid fa-check"></i>
+                                                : <i className="fa-solid fa-plus"></i>
+                                            ) : null}
+                                            <p>찜하기</p>
+                                        </button>
+                                        <Link to={`/detail/${item.id}`}>
+                                            <i className="fa-solid fa-circle-info"></i>
+                                            <p>상세정보</p>
+                                        </Link>
+                                    </div>
                                     {/* {item.release_date}{item.vote_average}{item.origin_country} */}
                                 </li>
                             ))}
-                            <div className="left-arrow" onClick={()=>leftClick(index)}></div>
-                            <div className="right-arrow" onClick={()=>rightClick(index)}></div>
                         </ul>
+                        <div className="left-arrow" onClick={()=>leftClick(index)}></div>
+                        <div className="right-arrow" onClick={()=>rightClick(index)}></div>
                     </div>                  
                 </div>
             )))}                

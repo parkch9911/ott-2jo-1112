@@ -1,7 +1,11 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
 import './Movie.css'
 import { fetchAll } from "../../context/useFetch"
+import { LoginContext } from "../../context/LoginContext";
+import { WishContext } from "../../context/WishContext";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 export default function Movie(){    
@@ -25,12 +29,12 @@ export default function Movie(){
     const[more, setMore] = useState(21);
 
     //메인배너 정보 불러오기
-    const mainBanner = [...movies].filter(movie => movie.id === 200875 || movie.id === 94605 || movie.id === 209110 || movie.id === 1218925 || movie.id === 1156594);
+    const mainBanner = [...movies].filter(movie => movie.id === 1306525 || movie.id === 1062722 || movie.id === 496243 || movie.id === 1218925 || movie.id === 1242898);
 
     useEffect(() => {
         fetchAll()
         .then((data) => {
-            const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161);
+            const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1523160 && movie.title);
             setMovies(data2);
             setList(data2);
             setMore(21);
@@ -41,6 +45,16 @@ export default function Movie(){
         });
     }, []);
 
+
+        const{id} = useParams()
+    // 전에는 JSON에서 보내온 전체의 배열 중 find를 썼는데 이번엔 fetchAll 이용해서 아이디 일치하는거 찾아야함
+    const item = [...movies].find((item)=>item.id === Number(id))
+
+    const navi=useNavigate();
+    const {user1,user2,user3}=useContext(LoginContext);
+    const {addwish1,isinwish1,removewish1,
+            addwish2,isinwish2,removewish2,
+            addwish3,isinwish3,removewish3,wishMovies1,wishMovies2,wishMovies3} =useContext(WishContext);
     
     //높은 평점순
     const vote = [...movies].sort((a,b)=> b.vote_average - a.vote_average);
@@ -240,10 +254,34 @@ export default function Movie(){
                                 <ul>
                                     {list.slice(0,more).map((item,index)=>(
                                         <li key={index}>
-                                            <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
+                                            
                                                 <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                            </Link>
-                                            {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                                
+                                                <div className="black">
+                                                <button type="button" onClick={()=>
+                                                {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                    {user1 ? (
+                                                        isinwish1(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : user2 ? (
+                                                        isinwish2(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : user3 ? (
+                                                        isinwish3(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : null}
+                                                    <p>찜하기</p>
+                                                </button>
+                                                <Link to={`/detail/${item.id}`}>
+                                                    <i className="fa-solid fa-circle-info"></i>
+                                                    <p>상세정보</p>
+                                                </Link>
+                                            </div>
+                                            
                                         </li>
                                     ))}
                                 </ul>
@@ -259,19 +297,66 @@ export default function Movie(){
                                     {searchResult.length === 0 ?                                    
                                         vote.slice(0,21).map((item,index)=>(
                                             <li key={index}>
-                                                <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
+                                                
                                                     <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                                </Link>
-                                                {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+
+                                                    <div className="black">
+                                                    <button type="button" onClick={()=>
+                                                    {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                    :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                        {user1 ? (
+                                                            isinwish1(item.id)
+                                                            ? <i className="fa-solid fa-check"></i>
+                                                            : <i className="fa-solid fa-plus"></i>
+                                                        ) : user2 ? (
+                                                            isinwish2(item.id)
+                                                            ? <i className="fa-solid fa-check"></i>
+                                                            : <i className="fa-solid fa-plus"></i>
+                                                        ) : user3 ? (
+                                                            isinwish3(item.id)
+                                                            ? <i className="fa-solid fa-check"></i>
+                                                            : <i className="fa-solid fa-plus"></i>
+                                                        ) : null}
+                                                        <p>찜하기</p>
+                                                    </button>
+                                                    <Link to={`/detail/${item.id}`}>
+                                                        <i className="fa-solid fa-circle-info"></i>
+                                                        <p>상세정보</p>
+                                                    </Link>
+                                                </div>
+                                                
                                             </li>
                                         ))
                                     :
                                         searchResult.slice(0,more).map((item,index)=>(
                                             <li key={index}>
-                                                <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
+                                                
                                                     <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
+                                                
+                                                    <div className="black">
+                                                <button type="button" onClick={()=>
+                                                {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                    {user1 ? (
+                                                        isinwish1(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : user2 ? (
+                                                        isinwish2(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : user3 ? (
+                                                        isinwish3(item.id)
+                                                        ? <i className="fa-solid fa-check"></i>
+                                                        : <i className="fa-solid fa-plus"></i>
+                                                    ) : null}
+                                                    <p>찜하기</p>
+                                                </button>
+                                                <Link to={`/detail/${item.id}`}>
+                                                    <i className="fa-solid fa-circle-info"></i>
+                                                    <p>상세정보</p>
                                                 </Link>
-                                                {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                            </div>
                                             </li>
                                         ))
                                     }
