@@ -160,16 +160,35 @@ body{
     flex-wrap: wrap;
     margin-bottom: 25px;
 }
-.footer-top-linkbox a{
+.footer-top-linkbox span{
     width: 250px;
     margin-bottom: 30px;
     color: rgb(204, 204, 204);
     font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.footer-top-linkbox span:hover{
+    text-decoration: underline;
 }
 .footer-bottom-box p{
     font-size: 13px;
     display: inline-block;
     margin-bottom: 60px;
     color: gray;
+    
 }
+.footer-icons{
+    width: 600px;
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
 
+}
+.footer-icons .ficon{
+    cursor: pointer;
+    transition: 0.3s;
+}
+.footer-icons .ficon:hover{
+    transform: scale(1.3);
+}
