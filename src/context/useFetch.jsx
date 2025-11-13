@@ -42,21 +42,28 @@ export function fetchTarget(endpoint) {
 
 // 모든 엔드포인트 fetch + 중복 제거
 export function fetchAll() {
-  const promises = Object.values(endpoints).map((endpoint) =>
-    fetchTarget(endpoint)
+  const promises = Object.entries(endpoints).map(([key, endpoint]) =>
+    fetchTarget(endpoint).then((results) =>
+      results.map((item) => ({
+        ...item,
+        isAdult: key === "movieAdult" || key === "tvAdult", // 성인 플래그
+      }))
+    )
   );
 
   return Promise.all(promises).then((resultsArray) => {
     const allData = resultsArray.flat();
-
+    console.log(allData)
+    // 중복 제거
     const seenIds = new Set();
     return allData.filter((item) => {
       if (seenIds.has(item.id)) return false;
       seenIds.add(item.id);
       return true;
     });
+
   });
 }
 // 성인 컨텐츠 성인 인증 필요
 // movieAdult  tvAdult 엔드포인트 가져올 시
-// img 위에 오버레이로 19 표시
+// img

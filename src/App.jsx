@@ -7,6 +7,7 @@ import Detail from './pages/detail/Detail.jsx'
 import DataProvider from './context/DataContext.jsx'
 import Header from './common/Header.jsx'
 import Home from './pages/home/Home.jsx'
+import Tv from './pages/series/Tv.jsx'
 import Movie from './pages/movie/Movie.jsx'
 /// 테스트용
 import Test from './pages/Test.jsx'
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/search" element={<InputPage />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/tv" element={<Tv />} />
         <Route path="/movie" element={<Movie />} />
         <Route path="/reco" element={<Recommand />} />
         <Route path="/test" element={<Test />} />
