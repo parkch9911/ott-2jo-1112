@@ -289,3 +289,27 @@
     border-radius: 4px;
     z-index: 10;
 }
+@keyframes spin{
+       0%{transform : rotate(0deg);}
+       100%{transform : rotate(360deg);}
+}
+.load-overlay{
+    width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 66px;
+	background-color: rgba(0,0,0,0.9);
+	z-index: 900;
+    padding-top: 400px;
+    padding-left: 900px;
+}
+.load-overlay img{
+    animation : spin 2s linear infinite;
+    z-index: 999;
+}
+.load-content p{
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    z-index: 999;
+}

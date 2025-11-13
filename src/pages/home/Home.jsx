@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 export default function Home(){
 
-    
+
     //영화 전체 DB 불러오기
     const [movies, setMovies] = useState([]);
 
@@ -133,8 +133,24 @@ export default function Home(){
         return () => clearInterval(interval);
     }); 
 
+    
+    const [isLoad,setIsLoad]=useState(true);
+    useEffect(()=>{
+        setTimeout(()=>{
+        setIsLoad(false);
+        },1111113000)
+    },[])
 
     return(
+    <>
+        {isLoad && 
+        <div className='isLoading'>
+            <div className='load-overlay'>
+                <img src='/img/buffer.png' alt='로딩 이미지' />
+                <p>불러오는 중...</p>
+            </div>
+        </div>}
+	<div>메인콘텐츠</div>
         <div className="main-container">
             <div className="banner">
                 <div className="main-banner">
@@ -328,5 +344,6 @@ export default function Home(){
                 </div>
             )))}                
         </div>
+    </>
     )
 }
