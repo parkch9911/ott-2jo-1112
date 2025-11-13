@@ -137,3 +137,39 @@ body{
     margin-right: 250px;
 }
 /* ==========================footer */
+.footer-box{
+    width: 100%;
+    background-color: rgb(24, 24, 24);
+    margin-top: 150px;
+}
+.footer-wrap{
+    width: 1000px;
+    margin: 0 auto;
+}
+.footer-wrap .footer-top-box{
+    padding-top: 30px;
+}
+.footer-wrap .footer-top-box p{
+    display: block;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: rgb(204, 204, 204);
+}
+.footer-top-linkbox{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+.footer-top-linkbox a{
+    width: 250px;
+    margin-bottom: 30px;
+    color: rgb(204, 204, 204);
+    font-size: 17px;
+}
+.footer-bottom-box p{
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 60px;
+    color: gray;
+}
+

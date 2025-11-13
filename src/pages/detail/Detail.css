@@ -19,6 +19,10 @@
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(200, 0, 0, 0.6);
 }
+.movie-box .movie-image-box{
+    width: 800px;
+    height: 465px;
+}
 .moviezone img{
     width: 800px;
     margin-bottom: 15px;
@@ -80,12 +84,25 @@
 }
 .movie-box-middle .middle-vote{
     font-size: 24px;
-    margin-bottom: 5px;
     color: rgb(233, 233, 233);
+    margin-bottom: 0;
 }
 .movie-box-middle .middle-open{
     font-size: 16px;
     color: rgb(206, 206, 206);
+    display: inline-block;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+.hdline{
+    display: flex;
+}
+.movie-box-middle img{
+    margin-top: 2px;
+    margin-left: 10px;
+    width: 35px;
+    display: inline;
+
 }
 .movie-box-middle .middle-vote i{
     font-size: 20px;
@@ -145,6 +162,7 @@
 /* 뒤로가기 버튼 */
 .detail-backBtn-box{
     text-align: center;
+    cursor: pointer;
 }
 .detail-wrap .backBtn{
     padding: 15px 30px;
@@ -184,12 +202,29 @@
     flex-wrap: wrap;
     justify-content: space-between
 }
+.detail-right-ul li{
+    position: relative;
+}
 .detail-right-ul li img{
     width: 320px;
     margin-bottom: 5px;
     border-radius: 5px;
     transition: 0.3s;
 }
+.detail-right-ul li .detail-right-title{
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    left: 5px;
+    padding: 3px 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    font-size: 14px;
+
+}
 .detail-right-ul li img:hover{
     transform: scale(1.05);
+}
+.playMovie{
+    cursor: pointer;
 }

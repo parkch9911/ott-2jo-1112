@@ -6,7 +6,7 @@ export default function Footer(){
             <div className="footer-box">
                 <div className="footer-wrap">
                     <div className="footer-top-box">
-                        <p>질문이 있으신가요? 문의 전화:00-308-321-0161 (수신자 부담)(무료 전화)</p>
+                        <p>질문이 있으신가요? 문의 전화:00-308-321-0161 (수신자 부담) (무료 전화)</p>
                         <div className="footer-top-linkbox">
                             <Link>자주 묻는 질문</Link>
                             <Link>고객 센터</Link>
@@ -23,7 +23,8 @@ export default function Footer(){
                         주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161<br/>
                         사업자등록번호: 165-87-00119<br/>
                         클라우드 호스팅: Amazon Web Services Inc.<br/>
-                        공정거래위원회 웹사이트</p>
+                        웹사이트 제작: 2조</p>
+                        
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import LoginProvider from './context/LoginContext.jsx'
 import SelectProfile from "./pages/selectProfile/SelectProfile.jsx"
 import Footer from './common/Footer.jsx'
-import Detail from './pages/Detail/Detail.jsx'
+import Detail from './pages/detail/Detail.jsx'
 import DataProvider from './context/DataContext.jsx'
 import Header from './common/Header.jsx'
 import Home from './pages/home/Home.jsx'
@@ -34,7 +34,7 @@ function App() {
         <Route path="/selectProfile" element={<SelectProfile />} />
         <Route path='/detail/:id' element={<Detail />} />
       </Routes>
-      {/* <Footer/> */}
+      <Footer/>
       {/* css 부족해서 죽여놈 */}
     </SearchProvider>
      </LoginProvider>

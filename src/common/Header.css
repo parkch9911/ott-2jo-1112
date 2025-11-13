@@ -114,6 +114,9 @@
     transform: rotate(-180deg);
     transition: transform 0.3s ease;
 }
+.profile span{
+    cursor: pointer;
+}
 .dropdown-container {
     position: relative;
 }

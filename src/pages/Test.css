@@ -20,6 +20,16 @@
 }
 .wish-item{
     margin-bottom: 20px;
+    text-align: center;
+}
+.wish-item p{
+    margin-left: 20px;
+    margin-top: 5px;
+    width: 290px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .wish-lists img{
     border-radius: 10px;
