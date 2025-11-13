@@ -329,6 +329,8 @@
 
 
 
+
+
 .main-contents .content-wrap ul li .black{
     opacity: 0;
     position: absolute;
@@ -376,4 +378,3 @@
 .main-contents .content-wrap ul li:hover .black i{
     font-size: 30px;
 }
-

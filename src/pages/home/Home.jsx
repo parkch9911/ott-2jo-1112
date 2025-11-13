@@ -22,7 +22,7 @@ export default function Home(){
     useEffect(() => {
         fetchAll()
         .then((data) => {
-            const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1523160);
+            const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1215106 && movie.id !== 1523160);
             setMovies(data2);
             setCurrent2(0);
         })
@@ -167,36 +167,110 @@ export default function Home(){
                             <ul style={{transform: mov == popular || mov==now ? `translateX(-${(current[index] * 100)/3.33}%)` : `translateX(-${current[index] * 1823}px)`  }} className={mov == popular || mov==now ? 'popul' : 'garo'}>
                                 {mov.slice(0,20).map((item,i)=> item.length !== 0 ?(
                                     <li key={item.id}>
-                                        
-                                            {mov==popular ? <span className="popNum">{i+1}</span> : ''}
-                                            {mov==popular ||  mov==now ? (<img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} className={mov == popular ? 'popimg' : ''}/>)
-                                            : (<img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />)}
-                                            {mov==vote || mov==us || mov==jjim ? <p className="title">{item.name || item.title}</p> : null }      
-                                        
-                                            <div className="black">
-                                                <button type="button" onClick={()=>
-                                                {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
-                                                :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
-                                                    {user1 ? (
-                                                        isinwish1(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : user2 ? (
-                                                        isinwish2(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : user3 ? (
-                                                        isinwish3(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : null}
-                                                    <p>찜하기</p>
-                                                </button>
-                                                <Link to={`/detail/${item.id}`}>
-                                                    <i className="fa-solid fa-circle-info"></i>
-                                                    <p>상세정보</p>
-                                                </Link>
+                                        {item.isAdult ? (
+                                            // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                            <div className="adultOverlayWrap"
+                                                onClick={() => alert("성인 인증이 필요합니다")}>
+                                                <div className="adultOverlay"/>
+                                                <div className="mark19">19</div>
+                                                <p
+                                                style={{
+                                                    position: "absolute",
+                                                    backgroundColor:"black",
+                                                    width: "100%",
+                                                    height:"60px",
+                                                    top: "40%",
+                                                    left: "50%",
+                                                    transform: "translate(-50%, -50%)",
+                                                    color: "white",
+                                                    fontSize: "14px",
+                                                    fontWeight: "600",
+                                                    textAlign: "center",
+                                                    lineHeight:"60px",
+                                                    zIndex: 10,
+                                                }}
+                                                >
+                                                성인 인증이 필요합니다.
+                                                </p>
+                                                {mov == popular ? <span className="popNum">{i + 1}</span> : ""}
+                                                {mov == popular || mov == now ? (
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                                                    alt={item.title}
+                                                    className={mov == popular ? "popimg" : ""}
+                                                />
+                                                ) : (
+                                                <img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />
+                                                )}
                                             </div>
+                                            ) : (
+                                            // 성인 아니면 정상 Link
+                                            <>
+                                                {mov == popular ? <span className="popNum">{i + 1}</span> : ""}
+                                                {mov == popular || mov == now ? (
+                                                <>
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                                                    alt={item.title}
+                                                    className={mov == popular ? "popimg" : ""}
+                                                />
+                                                <div className="black">
+                                                            <button type="button" onClick={()=>
+                                                            {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                            :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                                {user1 ? (
+                                                                    isinwish1(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user2 ? (
+                                                                    isinwish2(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user3 ? (
+                                                                    isinwish3(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : null}
+                                                                <p>찜하기</p>
+                                                            </button>
+                                                            <Link to={`/detail/${item.id}`}>
+                                                                <i className="fa-solid fa-circle-info"></i>
+                                                                <p>상세정보</p>
+                                                            </Link>
+                                                        </div>
+                                                </>
+                                                ) : (
+                                                <>
+                                                <img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />
+                                                <div className="black">
+                                                            <button type="button" onClick={()=>
+                                                            {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                            :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                                {user1 ? (
+                                                                    isinwish1(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user2 ? (
+                                                                    isinwish2(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user3 ? (
+                                                                    isinwish3(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : null}
+                                                                <p>찜하기</p>
+                                                            </button>
+                                                            <Link to={`/detail/${item.id}`}>
+                                                                <i className="fa-solid fa-circle-info"></i>
+                                                                <p>상세정보</p>
+                                                            </Link>
+                                                        </div>
+                                                        </>
+                                                )}
+                                         </>   
+                                        )}
+                                        {/* {item.release_date}{item.vote_average}{item.origin_country}{item.popularity} */}
                                     </li>
                                 ): null)}
                             </ul>

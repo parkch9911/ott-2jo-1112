@@ -38,7 +38,15 @@ export default function InputPage() {
     const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     fetchTarget(randomCategory.endpoint)
       .then((data) => {
-        setRecommendList(data);
+        // movieAdult / tvAdult 인 경우 isAdult 플래그 자동 적용
+        const markedData = data.map((item) => ({
+          ...item,
+          isAdult:
+            randomCategory.name.includes("성인") // 이름 기준 플래그
+              ? true
+              : false,
+        }));
+        setRecommendList(markedData);
         setRecommendTitle(`추천 컨텐츠 : ${randomCategory.name}`);
       })
       .catch((err) => console.error("랜덤 추천 fetch 실패:", err));
@@ -48,7 +56,7 @@ export default function InputPage() {
     if (!searchText) fetchRandomRecommend();
     const interval = setInterval(() => {
       if (!searchText) fetchRandomRecommend();
-    }, 10000);
+    }, 100000);
     return () => clearInterval(interval);
   }, [searchText]);
 
@@ -95,7 +103,11 @@ export default function InputPage() {
     setRelatedGenres([]);
     fetchTarget(endpoint)
       .then((data) => {
-        setRecommendList(data);
+        const markedData = data.map((item) => ({
+          ...item,
+          isAdult: name.includes("성인"),
+        }));
+        setRecommendList(markedData);
         setRecommendTitle(`추천 컨텐츠 : ${name}`);
       })
       .catch((err) => console.error("카테고리 fetch 실패:", err));
@@ -113,20 +125,58 @@ export default function InputPage() {
     setRelatedGenres([]);
   };
 
+  // 이미지 렌더링 함수 (19 오버레이 적용)
+  const renderImage = (item) => (
+    <div key={item.id}>
+      {item.isAdult ? (
+      // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+      <div className="adultOverlayWrap"
+      onClick={() => alert("성인 인증이 필요합니다")}>
+        <div className="adultOverlay"/>
+          <div className="mark19">19</div>
+          <span style={{
+            position: "absolute",
+            backgroundColor:"black",
+            width: "100%",
+            height:"60px",
+            top: "45%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "white",
+            fontSize: "14px",
+            fontWeight: "600",
+            textAlign: "center",
+            lineHeight:"60px",
+            zIndex: 10,
+            }}>성인 인증이 필요합니다.
+          </span>
+          <img
+            src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
+            alt={item.title || item.name}
+            width="200"
+            style={{ display: "block", borderRadius: "4px" }}
+          />
+        </div>
+        ) : (
+        // 성인 아니면 정상 Link
+          <Link to={`/detail/${item.id}`} style={{ textDecoration: "none", position: "relative", display: "inline-block" }}>
+            <img
+              src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
+              alt={item.title || item.name}
+              width="200"
+              style={{ display: "block", borderRadius: "4px" }}
+            />
+          </Link>
+        )}
+    </div>                             
+  );
+
   // 추천 컨텐츠 렌더링
   const renderRecommend = () => (
     <div className="recommend-wrap">
       <p className="result-head">{recommendTitle || "추천 컨텐츠"}</p>
       <div className="result-lists">
-        {recommendList.map((item) => (
-          <Link to={`/detail/${item.id}`} key={item.id}>
-            <img
-              src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
-              alt={item.title || item.name}
-              width="200"
-            />
-          </Link>
-        ))}
+        {recommendList.map((item) => renderImage(item))}
       </div>
     </div>
   );
@@ -135,21 +185,13 @@ export default function InputPage() {
   const renderSearchResults = () => {
     if (!searchText) return null;
 
-    // 검색 결과가 있을 때
     if (searchResults.length > 0) {
       return (
         <div className="search-results">
-          <p className="result-head">검색 결과 : {searchText}</p>
+          <p className="result-head">검색 결과</p>
+          <p className="movieNum">총 {searchResults.length}개의 결과가 있습니다.</p>
           <div className="result-lists">
-            {searchResults.map((item) => (
-              <Link to={`/detail/${item.id}`} key={item.id}>
-                <img
-                  src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
-                  alt={item.title || item.name}
-                  width="200"
-                />
-              </Link>
-            ))}
+            {searchResults.map((item) => renderImage(item))}
           </div>
 
           {/* 연관 장르별 콘텐츠 */}
@@ -164,15 +206,7 @@ export default function InputPage() {
               <div key={genreName}>
                 <p className="result-head">연관 장르 : {genreName}</p>
                 <div className="result-lists">
-                  {genreItems.map((item) => (
-                    <Link to={`/detail/${item.id}`} key={item.id}>
-                      <img
-                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                        alt={item.title || item.name}
-                        width="200"
-                      />
-                    </Link>
-                  ))}
+                  {genreItems.map((item) => renderImage(item))}
                 </div>
               </div>
             );
@@ -181,15 +215,14 @@ export default function InputPage() {
       );
     }
 
-    // 검색 결과가 없을 때
     return (
       <>
         <div className="search-results">
-          <p className="result-head">검색 결과가 없습니다</p>
+          <p className="result-head">검색 결과</p>
+          <p className="movieNum">검색결과가 없습니다.</p>
         </div>
         {renderRecommend()}
       </>
-
     );
   };
 

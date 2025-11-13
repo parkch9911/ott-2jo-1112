@@ -49,6 +49,9 @@
 .profile:hover .basicTab{
     transform: scale(1.1);
 }
+.search-btn svg, .dropdown-container .bell svg{
+    transition: 0.3s;
+}
 .search-btn svg:hover{
     transform: scale(1.1);
 }

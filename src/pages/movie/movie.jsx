@@ -254,52 +254,38 @@ export default function Movie(){
                                 <ul>
                                     {list.slice(0,more).map((item,index)=>(
                                         <li key={index}>
-                                            
-                                                <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                                
-                                                <div className="black">
-                                                <button type="button" onClick={()=>
-                                                {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
-                                                :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
-                                                    {user1 ? (
-                                                        isinwish1(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : user2 ? (
-                                                        isinwish2(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : user3 ? (
-                                                        isinwish3(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : null}
-                                                    <p>찜하기</p>
-                                                </button>
-                                                <Link to={`/detail/${item.id}`}>
-                                                    <i className="fa-solid fa-circle-info"></i>
-                                                    <p>상세정보</p>
-                                                </Link>
-                                            </div>
-                                            
-                                        </li>
-                                    ))}
-                                </ul>
-                            </>
-                        :
-                        //검색했을때 검색결과 출력
-                            <>
-                                <h4>검색결과</h4>
-                                <p className="movieNum">{searchResult.length === 0 ? '검색결과가 없습니다.' : `총 ${searchResult.length}개의 결과가 있습니다.`}</p>
-                                {/* 검색결과 없으면 추천작품(평점순) 있으면 결과리스트 노출 */}
-                                {searchResult.length === 0 ? <h4>추천작품</h4> : null}
-                                <ul>
-                                    {searchResult.length === 0 ?                                    
-                                        vote.slice(0,21).map((item,index)=>(
-                                            <li key={index}>
-                                                
-                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-
+                                            {item.isAdult ? (
+                                                // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                                <div className="adultOverlay"
+                                                    onClick={() => alert("성인 인증이 필요합니다")}>
+                                                    <div className="adultOverlay"/>
+                                                    <div className="mark19">19</div>
+                                                    <p
+                                                    style={{
+                                                        position: "absolute",
+                                                        backgroundColor:"black",
+                                                        width: "100%",
+                                                        height:"60px",
+                                                        top: "50%",
+                                                        left: "50%",
+                                                        transform: "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        fontSize: "14px",
+                                                        fontWeight: "600",
+                                                        textAlign: "center",
+                                                        lineHeight:"60px",
+                                                        zIndex: 10,
+                                                    }}
+                                                    >
+                                                    성인 인증이 필요합니다.
+                                                    </p>
+                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                </div>
+                                                ) : (
+                                                // 성인 아니면 정상 Link
+                                                <>
+                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    
                                                     <div className="black">
                                                     <button type="button" onClick={()=>
                                                     {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
@@ -324,39 +310,147 @@ export default function Movie(){
                                                         <p>상세정보</p>
                                                     </Link>
                                                 </div>
-                                                
+                                            </>
+                                            )}
+                                            {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        :
+                        //검색했을때 검색결과 출력
+                            <>
+                                <h4>검색결과</h4>
+                                <p className="movieNum">{searchResult.length === 0 ? '검색결과가 없습니다.' : `총 ${searchResult.length}개의 결과가 있습니다.`}</p>
+                                {/* 검색결과 없으면 추천작품(평점순) 있으면 결과리스트 노출 */}
+                                {searchResult.length === 0 ? <h4>추천작품</h4> : null}
+                                <ul>
+                                    
+                                    {searchResult.length === 0 ?                                    
+                                        vote.slice(0,21).map((item,index)=>(
+                                            <li key={index}>
+                                                {item.isAdult ? (
+                                                    // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                                    <div className="adultOverlay"
+                                                        onClick={() => alert("성인 인증이 필요합니다")}>
+                                                        <div className="adultOverlay"/>
+                                                        <div className="mark19">19</div>
+                                                        <p
+                                                        style={{
+                                                            position: "absolute",
+                                                            backgroundColor:"black",
+                                                            width: "100%",
+                                                            height:"60px",
+                                                            top: "50%",
+                                                            left: "50%",
+                                                            transform: "translate(-50%, -50%)",
+                                                            color: "white",
+                                                            fontSize: "14px",
+                                                            fontWeight: "600",
+                                                            textAlign: "center",
+                                                            lineHeight:"60px",
+                                                            zIndex: 10,
+                                                        }}
+                                                        >
+                                                        성인 인증이 필요합니다.
+                                                        </p>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    </div>
+                                                    ) : (
+                                                    // 성인 아니면 정상 Link
+                                                    <>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    
+                                                        <div className="black">
+                                                            <button type="button" onClick={()=>
+                                                            {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                            :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                                {user1 ? (
+                                                                    isinwish1(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user2 ? (
+                                                                    isinwish2(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user3 ? (
+                                                                    isinwish3(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : null}
+                                                                <p>찜하기</p>
+                                                            </button>
+                                                            <Link to={`/detail/${item.id}`}>
+                                                                <i className="fa-solid fa-circle-info"></i>
+                                                                <p>상세정보</p>
+                                                            </Link>
+                                                        </div>
+                                                    </>
+
+                                                )}
                                             </li>
                                         ))
                                     :
                                         searchResult.slice(0,more).map((item,index)=>(
                                             <li key={index}>
-                                                
-                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                                
-                                                    <div className="black">
-                                                <button type="button" onClick={()=>
-                                                {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
-                                                :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
-                                                    {user1 ? (
-                                                        isinwish1(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : user2 ? (
-                                                        isinwish2(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : user3 ? (
-                                                        isinwish3(item.id)
-                                                        ? <i className="fa-solid fa-check"></i>
-                                                        : <i className="fa-solid fa-plus"></i>
-                                                    ) : null}
-                                                    <p>찜하기</p>
-                                                </button>
-                                                <Link to={`/detail/${item.id}`}>
-                                                    <i className="fa-solid fa-circle-info"></i>
-                                                    <p>상세정보</p>
-                                                </Link>
-                                            </div>
+                                                {item.isAdult ? (
+                                                    // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                                    <div className="adultOverlay"
+                                                        onClick={() => alert("성인 인증이 필요합니다")}>
+                                                        <div className="adultOverlay"/>
+                                                        <div className="mark19">19</div>
+                                                        <p
+                                                        style={{
+                                                            position: "absolute",
+                                                            backgroundColor:"black",
+                                                            width: "100%",
+                                                            height:"60px",
+                                                            top: "50%",
+                                                            left: "50%",
+                                                            transform: "translate(-50%, -50%)",
+                                                            color: "white",
+                                                            fontSize: "14px",
+                                                            fontWeight: "600",
+                                                            textAlign: "center",
+                                                            lineHeight:"60px",
+                                                            zIndex: 10,
+                                                        }}
+                                                        >
+                                                        성인 인증이 필요합니다.
+                                                        </p>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    </div>
+                                                    ) : (
+                                                    // 성인 아니면 정상 Link
+                                                    <>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                        <div className="black">
+                                                            <button type="button" onClick={()=>
+                                                            {user1?(isinwish1(item.id)?removewish1(item.id):addwish1(item)):user2?(isinwish2(item.id)?removewish2(item.id):addwish2(item))
+                                                            :(isinwish3(item.id)?removewish3(item.id):addwish3(item))}}>
+                                                                {user1 ? (
+                                                                    isinwish1(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user2 ? (
+                                                                    isinwish2(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : user3 ? (
+                                                                    isinwish3(item.id)
+                                                                    ? <i className="fa-solid fa-check"></i>
+                                                                    : <i className="fa-solid fa-plus"></i>
+                                                                ) : null}
+                                                                <p>찜하기</p>
+                                                            </button>
+                                                            <Link to={`/detail/${item.id}`}>
+                                                                <i className="fa-solid fa-circle-info"></i>
+                                                                <p>상세정보</p>
+                                                            </Link>
+                                                        </div>
+
+                                                    </>
+                                                )}
                                             </li>
                                         ))
                                     }
