@@ -1,17 +1,10 @@
-import { useState,useEffect,useContext } from "react";
-import { WishContext } from "../../context/WishContext";
-import { SearchContext } from "../../context/SearchContext";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import './Movie.css'
 import { fetchAll } from "../../context/useFetch"
 
 
-
-export default function Movie(){
-    //유저정보 불러오기
-    const{wishMovies3} = useContext(WishContext);
-    //영화 장르 id정보 불러오기
-    const{genreMap} = useContext(SearchContext);
+export default function Movie(){    
     //영화 전체 DB 불러오기
     const [movies, setMovies] = useState([]);
     //현재고른 카테고리의 체크표시를 위한 변수
@@ -28,10 +21,11 @@ export default function Movie(){
     const[searchClick, setSearchClick] = useState(false);
     //제목
     const[title, setTitle] = useState('ALL');
+    //더보기 버튼
+    const[more, setMore] = useState(21);
 
-    //메인배너(귀멸의 칼날 정보 불러오기)
-    const mainBanner = [...movies].filter(movie => movie.id === 1311031 || movie.id === 1156594);
-
+    //메인배너 정보 불러오기
+    const mainBanner = [...movies].filter(movie => movie.id === 200875 || movie.id === 94605 || movie.id === 209110 || movie.id === 1218925 || movie.id === 1156594);
 
     useEffect(() => {
         fetchAll()
@@ -39,24 +33,17 @@ export default function Movie(){
             const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161);
             setMovies(data2);
             setList(data2);
+            setMore(21);
+            setCurrent(0);
         })
         .catch((err) => {
             console.error("전체 영화 불러오기 실패:", err);
         });
     }, []);
-    console.log(movies);
-    const today = new Date();
-    //인기작
-    const popular = [...movies].sort((a,b)=> b.popularity - a.popularity);
-    //현재상영작
-    const now = [...movies].filter(movie => new Date(movie.release_date) <= today) // 오늘 이전 영화만
-                    .sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+
+    
     //높은 평점순
     const vote = [...movies].sort((a,b)=> b.vote_average - a.vote_average);
-
-    //헐리웃 영화
-    const us = [...movies].filter(movie => Array.isArray(movie.origin_country) && movie.origin_country.includes("US"))
-                .sort((a,b)=> new Date(b.release_date) - new Date(a.release_date));
 
     //현재 선택된 카테고리에 체크 표시를 위한 함수
     const checkHandler = (key) =>{
@@ -91,7 +78,8 @@ export default function Movie(){
         setChecked(null);
         setSearchClick(false);
         setSearchResult(array);
-        setSearchInput(''); 
+        setSearchInput('');
+        setMore(21);
 
         setInputVal(val);
         setTitle(val);
@@ -120,6 +108,7 @@ export default function Movie(){
 
         
         setSearchClick(true);
+        setMore(21);
 
         if(filtering.length > 0){
             return setSearchResult(filtering);
@@ -129,150 +118,175 @@ export default function Movie(){
         }
 
     }
-    console.log(searchResult);
 
-     //슬라이드 인덱스
+    //슬라이드 인덱스
     const[current, setCurrent] = useState(0);
 
     // 좌측버튼 클릭시
     const leftClick = ()=>{ 
-        const copy = [...current];
-
-        if(copy === 0){
-            copy === 0;
+        if(current === 0){
+            return setCurrent(0);
         }else{
-            copy = copy - 1;
+            return setCurrent(current-1);
         }
-        setCurrent(copy);
     }
 
     // 우측버튼 클릭시
     const rightClick = ()=>{
-        const copy = [...current];
-        
-        if(copy === 2){
-            copy === 2
+        if(current === mainBanner.length-1){
+            return setCurrent(mainBanner.length-1);
         }else{
-            copy = copy + 1;
+            return setCurrent(current+1);
         }
-        setCurrent(copy);
     }
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrent(current => (current + 1) % mainBanner.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }); 
+
+    //더보기 버튼클릭시
+    const moreClick = () =>{
+        let view = more;
+        view += view;
+        setMore(view);
+    }
+
+ 
+    
+
     return(
-        <div className="main-container">
-
-            <div className="main-info bg-color">
-                {mainBanner.map((item,index)=>(
-                    <div style={{transform: `translateX(-${(current * 100)}%)`}} key={index}>
-                        <div className="info-wrap" key={item.id}>
-                            <h2>{item.title}</h2>
-                            <p>{item.overview}</p>
-                            <Link to={`/detail/${item.id}`}>
-                                <button type="button">상세정보</button>
-                            </Link>
-                        </div>
+        <>
+            <div className="main-container">
+                
+                <div className="banner">
+                    <div className="main-banner">
+                        {mainBanner.map((item,index)=>(
+                            <div className="info-wrap" key={index} style={{transform: `translateX(-${(current * 100)}%)`, backgroundImage:`url(https://image.tmdb.org/t/p/original//${item.backdrop_path}.jpg)`}}>
+                                <div className="info-wrap2">
+                                    <h2>{item.title || item.name}</h2>
+                                    <p>{item.overview}</p>
+                                    <Link to={`/detail/${item.id}`}>
+                                        <button className="play"  type="button">재생하기</button>
+                                    </Link>
+                                    <Link to={`/detail/${item.id}`}>
+                                        <button className="info" type="button">상세정보</button>
+                                    </Link>
+                                </div>
+                                <div className="main-info bg-color"></div>
+                            </div>
+                        ))}
                     </div>
-                ))}
-                <div className="left-arrow" onClick={leftClick}></div>
-                <div className="right-arrow" onClick={rightClick}></div>
-            </div>
-            <div className="main-banner"></div>
+                    <div className="left-arrow" onClick={leftClick}></div>
+                    <div className="right-arrow" onClick={rightClick}></div>
+                </div>
 
-            <div className="category">
-                <div className="btns">
-                    <label htmlFor="list-view">장르별</label>
-                    <select name="list-view" id="list-view" onChange={(e)=>searchChange(e.target.value)} value={inputVal}>
-                        <option value="ALL">전체</option>
-                        <option value="28">액션</option>
-                        <option value="12">모험</option>
-                        <option value="16">애니메이션</option>
-                        <option value="35">코미디</option>
-                        <option value="80">범죄</option>
-                        <option value="99">다큐멘터리</option>
-                        <option value="18">드라마</option>
-                        <option value="10751">가족</option>
-                        <option value="14">판타지</option>
-                        <option value="36">역사</option>
-                        <option value="27">공포</option>
-                        <option value="10402">음악</option>
-                        <option value="9648">미스터리</option>
-                        <option value="10749">로맨스</option>
-                        <option value="878">SF</option>
-                        <option value="10770">TV영화</option>
-                        <option value="53">스릴러</option>
-                        <option value="10752">전쟁</option>
-                        <option value="37">서부</option>
-                    </select>
+                <div className="category">
+                    <div className="btns">
+                        <div className="btns-left">
+                            <label htmlFor="list-view">장르별</label>
+                            <select name="list-view" id="list-view" onChange={(e)=>searchChange(e.target.value)} value={inputVal}>
+                                <option value="ALL">전체</option>
+                                <option value="28">액션</option>
+                                <option value="12">모험</option>
+                                <option value="16">애니메이션</option>
+                                <option value="35">코미디</option>
+                                <option value="80">범죄</option>
+                                <option value="99">다큐멘터리</option>
+                                <option value="18">드라마</option>
+                                <option value="10751">가족</option>
+                                <option value="14">판타지</option>
+                                <option value="36">역사</option>
+                                <option value="27">공포</option>
+                                <option value="10402">음악</option>
+                                <option value="9648">미스터리</option>
+                                <option value="10749">로맨스</option>
+                                <option value="878">SF</option>
+                                <option value="10770">TV영화</option>
+                                <option value="53">스릴러</option>
+                                <option value="10752">전쟁</option>
+                                <option value="37">서부</option>
+                            </select>
 
-                    <label htmlFor="country">나라별</label>
-                    <select name="country" id="country" onChange={(e)=>searchChange(e.target.value)} value={inputVal}>
-                        <option value="ALL">전체</option>
-                        <option value="us">미국</option>
-                        <option value="kr">한국</option>
-                        <option value="cn">중국</option>
-                        <option value="jp">일본</option>
-                    </select>                    
-                    
-                    <button type="button" onClick={()=>{listSort('release_date');checkHandler(1);}}>{checked === 1 ? '✔️' : null}최신순</button>
-                    <button type="button" onClick={()=>{listSort('vote_average');checkHandler(2);}}>{checked === 2 ? '✔️' : null}평점순</button>
-                    <form onSubmit={(e)=>{e.preventDefault();searching();}}>
-                        <input type="text" onChange={(e)=>setSearchInput(e.target.value)} value={searchInput} placeholder="제목을 입력하세요" />
-                        <button type="submit">검색</button>
-                    </form>
+                            <label htmlFor="country">나라별</label>
+                            <select name="country" id="country" onChange={(e)=>searchChange(e.target.value)} value={inputVal}>
+                                <option value="ALL">전체</option>
+                                <option value="us">미국</option>
+                                <option value="kr">한국</option>
+                                <option value="cn">중국</option>
+                                <option value="jp">일본</option>
+                            </select>                    
+                            
+                            <button type="button" onClick={()=>{listSort('release_date');checkHandler(1);}}><span className="check">{checked === 1 ? <i className="fa-solid fa-check"></i> : null}</span> 최신순</button>
+                            <button type="button" onClick={()=>{listSort('vote_average');checkHandler(2);}}><span className="check">{checked === 2 ? <i className="fa-solid fa-check"></i> : null}</span> 평점순</button>
+                        </div>
+                        <form onSubmit={(e)=>{e.preventDefault();searching();}}>
+                            <input type="text" onChange={(e)=>setSearchInput(e.target.value)} value={searchInput} placeholder="제목을 입력하세요" />
+                            <button type="submit">검색</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div className="main-contents">
+                    <div className="content-wrap">
+                        {/* 검색을 안했을때 전체영화 */}
+                        {searchClick === false && (searchResult === null || searchResult === undefined || searchResult.length === 0) ?
+                            <>
+                                <h4>{title==='ALL'?'전체영화':title==='28'?'액션':title==='12'?'모험':title==='16'?'애니메이션':title==='35'?'코미디':title==='80'?'범죄':title==='99'?'다큐멘터리':title==='18'?'드라마':title==='10751'?'가족':title==='14'?'판타지':title==='36'?'역사':title==='27'?'공포':title==='10402'?'음악':title==='9648'?'미스터리':title==='10749'?'로맨스':title==='878'?'SF':title==='10770'?'TV영화':title==='53'?'스릴러':title==='10752'?'전쟁':title==='37'?'서부':title==='us'?'미국':title==='kr'?'한국':title==='cn'?'중국':title==='jp'?'일본':'전체영화'}</h4>
+                                <p className="movieNum">{list.length === 0 ? '' : `총 ${list.length}개의 영화가 있습니다.`}</p>
+                                <ul>
+                                    {list.slice(0,more).map((item,index)=>(
+                                        <li key={index}>
+                                            <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
+                                                <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
+                                            </Link>
+                                            {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        :
+                        //검색했을때 검색결과 출력
+                            <>
+                                <h4>검색결과</h4>
+                                <p className="movieNum">{searchResult.length === 0 ? '검색결과가 없습니다.' : `총 ${searchResult.length}개의 결과가 있습니다.`}</p>
+                                {/* 검색결과 없으면 추천작품(평점순) 있으면 결과리스트 노출 */}
+                                {searchResult.length === 0 ? <h4>추천작품</h4> : null}
+                                <ul>
+                                    {searchResult.length === 0 ?                                    
+                                        vote.slice(0,21).map((item,index)=>(
+                                            <li key={index}>
+                                                <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
+                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
+                                                </Link>
+                                                {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                            </li>
+                                        ))
+                                    :
+                                        searchResult.slice(0,more).map((item,index)=>(
+                                            <li key={index}>
+                                                <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
+                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
+                                                </Link>
+                                                {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </>
+                        }
+                        {((searchClick ? searchResult.length : list.length) > more) && (
+                            <div className="more-wrap">
+                                <button type="button" onClick={moreClick}>더보기</button>
+                            </div>
+                        )}                   
+                    </div>                  
                 </div>
             </div>
-            
-            <div className="main-contents">
-                <div className="content-wrap">
-                    {/* 검색을 안했을때 전체영화 */}
-                    {searchClick === false && (searchResult === null || searchResult === undefined || searchResult.length === 0) ?
-                        <>
-                            <h4>{title==='ALL'?'전체영화':title==='28'?'액션':title==='12'?'모험':title==='16'?'애니메이션':title==='35'?'코미디':title==='80'?'범죄':title==='99'?'다큐멘터리':title==='18'?'드라마':title==='10751'?'가족':title==='14'?'판타지':title==='36'?'역사':title==='27'?'공포':title==='10402'?'음악':title==='9648'?'미스터리':title==='10749'?'로맨스':title==='878'?'SF':title==='10770'?'TV영화':title==='53'?'스릴러':title==='10752'?'전쟁':title==='37'?'서부':title==='us'?'미국':title==='kr'?'한국':title==='cn'?'중국':title==='jp'?'일본':'전체영화'}</h4>
-                            <p>{list.length === 0 ? '' : `총 ${list.length}개의 영화가 있습니다.`}</p>
-                            <ul>
-                                {list.map((item,index)=>(
-                                    <li key={index}>
-                                        <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
-                                            <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                        </Link>
-                                        {/* {item.release_date}{item.vote_average}{item.origin_country} */}
-                                    </li>
-                                ))}
-                            </ul>
-                            
-                        </>
-                    :
-                    //검색했을때 검색결과 출력
-                        <>
-                            <h4>검색결과</h4>
-                            <p>{searchResult.length === 0 ? '검색결과가 없습니다.' : `총 ${searchResult.length}개의 결과가 있습니다.`}</p>
-                            {/* 검색결과 없으면 추천작품(평점순) 있으면 결과리스트 노출 */}
-                            {searchResult.length === 0 ? <h4>추천작품</h4> : null}
-                            <ul>
-                                {searchResult.length === 0 ?                                    
-                                    vote.slice(0,12).map((item,index)=>(
-                                        <li key={index}>
-                                            <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
-                                                <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                            </Link>
-                                            {/* {item.release_date}{item.vote_average}{item.origin_country} */}
-                                        </li>
-                                    ))
-                                :
-                                    searchResult.map((item,index)=>(
-                                        <li key={index}>
-                                            <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
-                                                <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                            </Link>
-                                            {/* {item.release_date}{item.vote_average}{item.origin_country} */}
-                                        </li>
-                                    ))
-                                }
-                            </ul>
-                        </>
-                    }
-                </div>                  
-            </div>
-        </div>
+        </>
+        
     )
 }
