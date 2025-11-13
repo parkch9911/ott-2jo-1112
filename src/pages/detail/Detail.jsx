@@ -91,8 +91,8 @@ const {genreMap}=useContext(SearchContext)
                         </span>
                     </div>
                     <div className="detail-backBtn-box">
-                        <Link className="homeBtn" to='/home'>홈으로 이동</Link>
-                        <button className="backBtn" onClick={()=>navi(-1)}>뒤로가기</button>  
+                        <Link className="homeBtn" to='/home' onClick={()=>window.scrollTo(0,0)}>홈으로 이동</Link>
+                        <button className="backBtn" onClick={()=>{navi(-1);window.scrollTo(0,0)}}>뒤로가기</button>  
                     </div>
                 </div>
                 <div className="another-movie">
