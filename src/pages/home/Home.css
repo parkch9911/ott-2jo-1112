@@ -293,15 +293,26 @@
        0%{transform : rotate(0deg);}
        100%{transform : rotate(360deg);}
 }
+.isLoading{
+    height: 100vh;
+    position: absolute;
+    z-index: 111111111111111111;
+    background: #000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
 .load-overlay{
-    width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 66px;
-	background-color: rgba(0,0,0,0.9);
-	z-index: 900;
-    padding-top: 400px;
-    padding-left: 900px;
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 900;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.load-overlay p{
+    text-align: center;
 }
 .load-overlay img{
     animation : spin 2s linear infinite;

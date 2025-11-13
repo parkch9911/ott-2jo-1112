@@ -138,7 +138,7 @@ export default function Home(){
     useEffect(()=>{
         setTimeout(()=>{
         setIsLoad(false);
-        },1111113000)
+        },1500)
     },[])
 
     return(
