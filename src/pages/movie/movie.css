@@ -3,68 +3,96 @@
     padding-bottom: 150px;
     overflow: hidden;
     color: #fff;
-    background-color: #000;
+    background-color: #131313;
+}
+.main-container .banner{
+    position: relative;
 }
 .main-container .bg-color{
     position: absolute;
-    top: 67px;
+    top: 0px;
     left: 0;
     right: 0;
     height: 600px;
-    background: -moz-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
-    background: -webkit-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
-    background: -o-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
-    background: -ms-linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
-    background: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 50%) 50%, #000000 100%);
+    background: -moz-linear-gradient(to bottom, #131313 0%, transparent 50%, #131313 100%);
+    background: -webkit-linear-gradient(to bottom, #131313 0%, transparent 50%, #131313 100%);
+    background: -o-linear-gradient(to bottom, #131313 0%, transparent 50%, #131313 100%);
+    background: -ms-linear-gradient(to bottom, #131313 0%, transparent 50%, #131313 100%);
+    background: linear-gradient(to bottom, #131313 0%, transparent 50%, #131313 100%);
 }
-.main-container .bg-color .info-wrap{
+.main-container .info-wrap2{
     position: absolute;
     left: 6%;
     bottom: 125px;
+    z-index: 1;
 }
-.main-container .bg-color .info-wrap h2{
+.main-container .info-wrap2 h2{
     font-size: 40px;
     margin: 0;
+    text-shadow: 0px 0px 5px #252525;
 }
-.main-container .bg-color .info-wrap p{
-    width: 678px;
-    height: 90px;
+.main-container .info-wrap2 p{
+    width: 540px;
+    font-size: 16px;
     overflow-y: hidden;
+    text-shadow: 0px 0px 5px #252525;
 }
-.main-container .bg-color .info-wrap button{
+.main-container .info-wrap2 button{
     border-radius: 5px;
-    width: 150px;
     line-height: 38px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     border: 0;
-    background-color: #ffffff;
-    margin-top: 20px;
-}
-.main-container .bg-color .info-wrap button:hover{
-    opacity: 0.9;
+    margin-top: 25px;
     cursor: pointer;
+    font-weight: 500;
+    padding: 3px 22px;
+}
+.main-container .info-wrap2 .play{
+    background-color: #e50914;
+    color: #FFF;
+    margin-right: 10px;
+}
+.main-container .info-wrap2 button:hover{
+    opacity: 0.9;
+}
+.main-container .info-wrap2 .info{
+    background-color: #fff;
+    color: #000;
 }
 
 .main-container .banner-wrap{
     position: relative;
 }
 .main-container .main-banner{
-    background-image: url('/public/img/main_bg.jpg');
     height: 600px;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 500%;
+}
+.main-container .main-banner .info-wrap{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
+    width: 100%;
+    transition: 0.5s;
 }
 
 .category .btns{
+    position: relative;
     color: #fff;
     line-height: 50px;
-    border-bottom: 1px solid #ddd;
-    border-top: 2px solid #515151;
     font-size: 14px;
     padding: 0 10px;
-    margin-top: 5px;
+    margin-top: 60px;
+    overflow: hidden;
+    padding: 0 50px;
+}
+.category .btns .btns-left{
+    float: left;
+}
+.category .btns form{
+    float: right;
 }
 .category .btns button{
     background-color: transparent;
@@ -73,6 +101,13 @@
     padding: 0 0 0 15px;
     color: #fff;
     cursor: pointer;
+    font-size: 17px;
+    width: 90px;
+}
+.category .btns button .check{
+    color: #e50914;
+    width: 22px;
+    display: inline-block;
 }
 .category .btns button:first-child{
     padding-left: 0;
@@ -82,21 +117,85 @@
 }
 .category .btns select{
     cursor: pointer;
+    width: 150px;
+    padding: 10px 40px 10px 15px;;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    background-color: #222;
+    color: white;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+     appearance: none;           /* 기본 화살표 제거 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path fill='white' d='M0 0l5 6 5-6z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) center;
+    background-size: 12px;
 }
-.category .btns label{
-    padding: 0 5px 0 0;
+.category .btns select:focus{
+    background-color: #333;
+    box-shadow: 0 0 10px #e50914;
+}
+.category .btns .btns-left label{
+    padding: 0 10px 0 0;
+    font-size: 17px;
 }
 .category .btns #country{
     margin-right: 15px;
 }
+.category .btns form input{
+    width: 250px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    background-color: #222;
+    color: white;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+}
+.category .btns form input:focus{
+    background-color: #333;
+    box-shadow: 0 0 10px #e50914;
+}
+.category .btns form button{
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.category .btns form button:hover{
+    background-color: #e50914;
+    border: 1px solid #e50914;
+}
+
+
 .content-wrap{
     padding: 0 50px;
     position: relative;
 }
 .content-wrap h4{
-    font-size: 32px;
-    margin-bottom: 15px;
+    font-size: 29px;
+    margin-bottom: 10px;
     margin-top: 40px;
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding: 10px 280px 13px 20px;
+    border-left: 5px solid #e50914;
+    background: linear-gradient(to right, #e50914 0%, transparent 80%);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
 }
 
 .content-wrap ul{
@@ -104,13 +203,20 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
-    gap: 22px;
+    gap: 0.3%;    
 }
 .content-wrap ul li{
     position: relative;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    width: 12.9%;
+    width: 13%;
+    margin-top: 1.2%;
+    margin-left: 0.9%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.content-wrap ul li:hover{
+    box-shadow: 0 0 25px rgba(229,9,20,0.6);
+    transform: scale(1.08);
 }
 .content-wrap ul li .popNum{
     color: #fff;
@@ -131,46 +237,64 @@
     display: block;
     margin-top:-45px   
 }
+.content-wrap .movieNum{
+    font-size: 19px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+.content-wrap .more-wrap{
+    text-align: center;
+    padding-top: 150px;
+    margin-top: -150px;
+    background: linear-gradient(#00000000 0%, #131313d6 50%);
+    position: relative;
+    z-index: 1;
+}
+.content-wrap .more-wrap button{
+    padding: 10px 53px 11px;
+    font-size: 18px;
+    background-color: #e50914;
+    border-radius: 8px;
+    color: #fff;
+    border: 1px solid #e50914;
+    font-weight: 500;
+    margin-top: 50px;
+    outline: 0;
+    cursor: pointer;
+}
+.content-wrap .more-wrap button:hover{
+    border: 1px solid #fff;
+    background-color: #131313;
+}
 
-.main-info .left-arrow:before{
+
+
+
+/* 화살표 */
+.left-arrow:before{
     content: "\276E";
 }
-.main-info .right-arrow:before{
+.right-arrow:before{
     content: "\276F";
 }
-.main-info .left-arrow{
+.left-arrow{
     left: 11px;
 }
-.main-info .right-arrow{
+.right-arrow{
     right: 11px;
 }
-.main-info .left-arrow,
-.main-info .right-arrow{
+.left-arrow,
+.right-arrow{
     position: absolute;
     cursor: pointer;
     font-size: 55px;
     top: 50%;
-    transform: translateY(-25%);
+    transform: translateY(-50%);
     text-shadow: 5px 5px 5px #252525;
+    z-index: 1;
 }
-.main-info .left-arrow:hover,
-.main-info .right-arrow:hover{
+.left-arrow:hover,
+.right-arrow:hover{
     opacity: 0.8;
-}
-
-.content2 {
-    float: left;
-    width: 50%;
-    overflow-x: hidden;
-}
-.content2 .content-wrap{
-    /* padding: 0 25px; */
-}
-
-.content2 .content-wrap ul{
-    width: 100%;
-    gap: 2.5%;
-}
-.content2 .content-wrap ul li{
-    width: 33.3%;
 }

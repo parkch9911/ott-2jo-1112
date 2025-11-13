@@ -14,10 +14,14 @@ export default function Home(){
     //영화 전체 DB 불러오기
     const [movies, setMovies] = useState([]);
 
+    //메인배너 정보 불러오기
+    const mainBanner = [...movies].filter(movie => movie.id === 219080 || movie.id === 30984 || movie.id === 1175942 || movie.id === 803796 || movie.id === 1376434);
+
     useEffect(() => {
         fetchAll()
         .then((data) => {
             setMovies(data);
+            setCurrent2(0);
         })
         .catch((err) => {
             console.error("전체 영화 불러오기 실패:", err);
@@ -40,27 +44,25 @@ export default function Home(){
     //내가 찜한 영화
     const jjim = user1? [...wishMovies1] : user2? [...wishMovies2] : user3? [...wishMovies3] : []
 
-    //개봉예정작
-    const coming = [...movies].filter(movie => new Date(movie.release_date) > today) // 오늘 이후 영화만
+    //애니메이션
+    const ani = [...movies].filter(movie => movie.genre_ids?.includes(16)) // 오늘 이후 영화만
                     .sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
     //한국영화
     const kor = [...movies].filter(movie => Array.isArray(movie.origin_country) && movie.origin_country.includes("KR"))
                 .sort((a,b)=> new Date(b.release_date) - new Date(a.release_date));
 
-    //메인배너(귀멸의 칼날 정보 불러오기)
-    const mainBanner = [...movies].filter(movie => movie.id === 1311031);
-    //console.log(mainBanner[0]);
-
-    const show = [popular, now, vote, us, jjim, coming, kor];
+    const show = [popular, now, vote, us, jjim, ani, kor];
 
 
     //슬라이드 인덱스
-    const[current, setCurrent] = useState([0,0,0,0,0,0,0]);
+    const[current, setCurrent] = useState([0,0,0,0,0,0,0,0,0]);
+    //메인배너 슬라이드 인덱스
+    const[current2, setCurrent2] = useState(0);
 
     // 좌측버튼 클릭시
     const leftClick = (i)=>{ 
         const copy = [...current];
-
+        
         if(copy[i] === 0){
             copy[i] === 0;
         }else{
@@ -74,29 +76,73 @@ export default function Home(){
         const copy = [...current];
         
         if(copy[i] === 2){
-            copy[i] === 2
+            copy[i] === 2;
         }else{
             copy[i] = copy[i] + 1;
         }
         setCurrent(copy);
+        
+    }
+
+    // 메인배너(좌측버튼 클릭시)
+    const leftBnClick = ()=>{ 
+        let copy = current2;
+        
+        if(copy === 0){
+            copy === 0;
+        }else{
+            copy = copy - 1;
+        }
+        setCurrent2(copy);
+    }
+
+    // 메인배너(우측버튼 클릭시)
+    const rightBnClick = ()=>{
+        let copy = current2;
+        
+        if(copy === mainBanner.length-1){
+            copy === mainBanner.length-1;
+        }else{
+            copy = copy + 1;
+        }
+        setCurrent2(copy);
+        
     }
     console.log(movies);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrent2(current2 => (current2 + 1) % mainBanner.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }); 
 
 
     return(
         <div className="main-container">
-            <div className="main-info bg-color">
-                {mainBanner.map((item)=>(
-                    <div className="info-wrap" key={item.id}>
-                        <h2>{item.title}</h2>
-                        <p>{item.overview}</p>
-                        <Link to={`/detail/${item.id}`}>
-                            <button type="button">상세정보</button>
-                        </Link>
-                    </div>
-                ))}
+            <div className="banner">
+                <div className="main-banner">
+                    {mainBanner.map((item,index)=>(
+                        <div className="info-wrap" key={index} style={{transform: `translateX(-${(current2 * 100)}%)`, backgroundImage:`url(https://image.tmdb.org/t/p/original//${item.backdrop_path}.jpg)`}}>
+                            <div className="info-wrap2">
+                                <h2>{item.title || item.name}</h2>
+                                <p>{item.overview}</p>
+                                <Link to={`/detail/${item.id}`}>
+                                    <button className="play"  type="button">재생하기</button>
+                                </Link>
+                                <Link to={`/detail/${item.id}`}>
+                                    <button className="info" type="button">상세정보</button>
+                                </Link>
+                            </div>
+                            <div className="main-info bg-color"></div>
+                        </div>
+                    ))}
+                </div>
+                <div className="left-arrow" onClick={leftBnClick}></div>
+                <div className="right-arrow" onClick={rightBnClick}></div>
             </div>
-            <div className="main-banner"></div>
+
             {show.map((mov,index)=>( index <= 4  ? (
                 <div className="main-contents" key={index}>
                     {mov.length !== 0 ?(
@@ -123,10 +169,10 @@ export default function Home(){
             ):(
                 <div className="main-contents contents2" key={index}>
                     <div className="contents-wrap">
-                        <h4>{mov==coming ? '개봉 예정작' : mov==kor ? '한국영화' : ''}</h4>
+                        <h4>{mov==ani ? '애니메이션' : mov==kor ? '한국영화' : ''}</h4>
                         {/* 30%씩 슬라이드 이동 */}
                         <ul>
-                            {mov.slice(0,3).map((item)=>(
+                            {mov.slice(0,3).map((item,index)=>(
                                 <li key={item.id}>
                                     <Link to={`/detail/${item.id}`}>
                                         <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
@@ -134,6 +180,8 @@ export default function Home(){
                                     {/* {item.release_date}{item.vote_average}{item.origin_country} */}
                                 </li>
                             ))}
+                            <div className="left-arrow" onClick={()=>leftClick(index)}></div>
+                            <div className="right-arrow" onClick={()=>rightClick(index)}></div>
                         </ul>
                     </div>                  
                 </div>
