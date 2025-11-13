@@ -36,18 +36,85 @@
     text-align: center;
     margin-top: 50px;
 }
-.wish-btn button{
+.wish-btn .wish-back{
     font-size: 18px;
     padding: 10px 20px;
     background-color: red;
     color: white;
     border-radius: 5px;
     border: none;
+    margin-left: 15px;
 }
-.wish-btn button:hover{
+.wish-dele{
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: red;
+    border-radius: 5px;
+    border: 1px solid red;
+}
+.wish-btn .wish-back:hover{
     background-color: rgb(146, 17, 17);
 }
+.wish-dele:hover{
+    background-color: rgb(36, 36, 36);
+}
+/* 아직 아무것도 없을 때  */
 .wish-noItem{
     color: rgb(139, 139, 139);
     margin: 20px auto;
+}
+.wish-page .deloverlay{
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.wish-page .realDel{
+    width: 400px;
+    height: 150px;
+    background-color: rgb(29, 29, 29);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+.wish-page .realDel p{
+    margin-bottom: 40px;
+    font-size: 17px;
+    font-weight: 400;
+    color: white;
+}
+.wish-page .realDel .delbtnbox{
+    display: flex;
+    justify-content: space-around;
+}
+.wish-page .realDel button{
+    width: 150px;
+    font-weight: bold;
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: none;
+
+}
+.wish-page .delbtnbox .yesbtn{
+    border: 1px solid red;
+    background-color: transparent;
+    color: red;
+}
+.delbtnbox .yesbtn:hover{
+    background-color: rgb(36, 36, 36);
+}
+.delbtnbox .nobtn{
+    background-color: red;
+    color: white;
+}
+.delbtnbox .nobtn:hover{
+    background-color: rgb(146, 17, 17);
 }
