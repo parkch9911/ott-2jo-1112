@@ -13,7 +13,7 @@ export default function Test(){
 
 
 const navi=useNavigate();
-const {wishMovies1,wishMovies2,wishMovies3}=useContext(WishContext)
+const {wishMovies1,wishMovies2,wishMovies3,setWishMovies1,setWishMovies2,setWishMovies3}=useContext(WishContext)
 const {user1,user2,user3}=useContext(LoginContext)
 //빈 배열 만들고 담는다. 
     const [movies, setMovies] = useState([]);
@@ -27,9 +27,21 @@ const {user1,user2,user3}=useContext(LoginContext)
       });
   }, []);
 
+  //전체삭제
+    const [deleAll,setDeleAll]=useState(false)
+    const yesiam = ()=>{
+        setDeleAll(!deleAll)
+        if(user1 === true){setWishMovies1([])
+      }else if(user2 === true){setWishMovies2([])
+      }else{setWishMovies3([])}
+    }   
+    const noiamnot = ()=>{
+        setDeleAll(!deleAll)
+    }
+
     return(
 
-        <div className="wish-page">
+      <div className="wish-page">
             {user1?<h1 className="wish-head">박찬하 님의 나중에 볼 영화</h1>
             :
             user2?<h1 className="wish-head">김성중 님의 나중에 볼 영화</h1>
@@ -57,9 +69,25 @@ const {user1,user2,user3}=useContext(LoginContext)
               :[]
               }
                 <div className="wish-btn">
-                  <button onClick={()=>navi(-1)}>뒤로가기</button>
+                  {user1 && wishMovies1.length > 0 && (<button className="wish-dele" onClick={()=>setDeleAll(!deleAll)}>전체삭제</button>)}
+                  {user2 && wishMovies2.length > 0 && (<button className="wish-dele" onClick={()=>setDeleAll(!deleAll)}>전체삭제</button>)}
+                  {user3 && wishMovies3.length > 0 && (<button className="wish-dele" onClick={()=>setDeleAll(!deleAll)}>전체삭제</button>)}
+                  <button className="wish-back" onClick={()=>navi(-1)}>뒤로가기</button>
                 </div>
             </div>  
-        </div>
+              {deleAll && 
+                <div className="deloverlay">
+                  <div className="realDel">
+                    <p>내가 찜한 콘텐츠를 모두 삭제하시겠습니까?</p>
+                    <div className="delbtnbox">
+                      <button type="button" className="yesbtn" onClick={yesiam}>예</button>
+                      <button type="button" className="nobtn" onClick={noiamnot}>아니오</button>
+                    </div>
+                  </div>
+                </div>
+              }
+      </div>
     )
 }
+                   
+             
