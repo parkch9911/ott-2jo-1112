@@ -152,12 +152,58 @@ export default function Home(){
                             <ul style={{transform: mov == popular || mov==now ? `translateX(-${(current[index] * 100)/3.33}%)` : `translateX(-${(current[index] * 100)/2.67}%)`  }} className={mov == popular || mov==now ? 'popul' : ''}>
                                 {mov.slice(0,20).map((item,i)=> item.length !== 0 ?(
                                     <li key={item.id}>
-                                        <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
-                                            {mov==popular ? <span className="popNum">{i+1}</span> : ''}
-                                            {mov==popular ||  mov==now ? (<img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} className={mov == popular ? 'popimg' : ''}/>)
-                                            : (<img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />)}         
-                                        </Link>
-                                        {item.release_date}{item.vote_average}{item.origin_country}{item.popularity}
+                                        {item.isAdult ? (
+                                            // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                            <div className="adultOverlayWrap"
+                                                onClick={() => alert("성인 인증이 필요합니다")}>
+                                                <div className="adultOverlay"/>
+                                                <div className="mark19">19</div>
+                                                <p
+                                                style={{
+                                                    position: "absolute",
+                                                    backgroundColor:"black",
+                                                    width: "100%",
+                                                    height:"60px",
+                                                    top: "40%",
+                                                    left: "50%",
+                                                    transform: "translate(-50%, -50%)",
+                                                    color: "white",
+                                                    fontSize: "14px",
+                                                    fontWeight: "600",
+                                                    textAlign: "center",
+                                                    lineHeight:"60px",
+                                                    zIndex: 10,
+                                                }}
+                                                >
+                                                성인 인증이 필요합니다.
+                                                </p>
+                                                {mov == popular ? <span className="popNum">{i + 1}</span> : ""}
+                                                {mov == popular || mov == now ? (
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                                                    alt={item.title}
+                                                    className={mov == popular ? "popimg" : ""}
+                                                />
+                                                ) : (
+                                                <img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />
+                                                )}
+                                            </div>
+                                            ) : (
+                                            // 성인 아니면 정상 Link
+                                            <Link to={`/detail/${item.id}`} style={{ textDecoration: "none", position: "relative", display: "inline-block" }}>
+                                                {mov == popular ? <span className="popNum">{i + 1}</span> : ""}
+                                                {mov == popular || mov == now ? (
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                                                    alt={item.title}
+                                                    className={mov == popular ? "popimg" : ""}
+                                                />
+                                                ) : (
+                                                <img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />
+                                                )}
+                                            </Link>
+                                        )}
+                                        {/* {item.release_date}{item.vote_average}{item.origin_country}{item.popularity} */}
                                     </li>
                                 ): null)}
                             </ul>

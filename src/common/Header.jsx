@@ -34,7 +34,7 @@ export default function Header() {
                     <Link to='/home'><img src="../../public/img/logoLong.png" /></Link>
                     <nav className="menu">
                     <Link to='/home'>홈</Link>
-                    <a href="#">시리즈</a>
+                    <Link to='/tv'>시리즈</Link>
                     <Link to='/movie'>영화</Link>
                     <Link to='/reco'>NEW! 요즘 대세 콘텐츠</Link>
                     <Link to='/test'>내가 찜한 리스트</Link>

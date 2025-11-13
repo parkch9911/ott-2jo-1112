@@ -240,9 +240,39 @@ export default function Movie(){
                                 <ul>
                                     {list.slice(0,more).map((item,index)=>(
                                         <li key={index}>
-                                            <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
-                                                <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                            </Link>
+                                            {item.isAdult ? (
+                                                // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                                <div className="adultOverlay"
+                                                    onClick={() => alert("성인 인증이 필요합니다")}>
+                                                    <div className="adultOverlay"/>
+                                                    <div className="mark19">19</div>
+                                                    <p
+                                                    style={{
+                                                        position: "absolute",
+                                                        backgroundColor:"black",
+                                                        width: "100%",
+                                                        height:"60px",
+                                                        top: "50%",
+                                                        left: "50%",
+                                                        transform: "translate(-50%, -50%)",
+                                                        color: "white",
+                                                        fontSize: "14px",
+                                                        fontWeight: "600",
+                                                        textAlign: "center",
+                                                        lineHeight:"60px",
+                                                        zIndex: 10,
+                                                    }}
+                                                    >
+                                                    성인 인증이 필요합니다.
+                                                    </p>
+                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                </div>
+                                                ) : (
+                                                // 성인 아니면 정상 Link
+                                                <Link to={`/detail/${item.id}`} style={{ textDecoration: "none", position: "relative", display: "inline-block" }}>
+                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                </Link>
+                                            )}
                                             {/* {item.release_date}{item.vote_average}{item.origin_country} */}
                                         </li>
                                     ))}
@@ -256,22 +286,81 @@ export default function Movie(){
                                 {/* 검색결과 없으면 추천작품(평점순) 있으면 결과리스트 노출 */}
                                 {searchResult.length === 0 ? <h4>추천작품</h4> : null}
                                 <ul>
+                                    
                                     {searchResult.length === 0 ?                                    
                                         vote.slice(0,21).map((item,index)=>(
                                             <li key={index}>
-                                                <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
-                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                                </Link>
-                                                {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                                {item.isAdult ? (
+                                                    // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                                    <div className="adultOverlay"
+                                                        onClick={() => alert("성인 인증이 필요합니다")}>
+                                                        <div className="adultOverlay"/>
+                                                        <div className="mark19">19</div>
+                                                        <p
+                                                        style={{
+                                                            position: "absolute",
+                                                            backgroundColor:"black",
+                                                            width: "100%",
+                                                            height:"60px",
+                                                            top: "50%",
+                                                            left: "50%",
+                                                            transform: "translate(-50%, -50%)",
+                                                            color: "white",
+                                                            fontSize: "14px",
+                                                            fontWeight: "600",
+                                                            textAlign: "center",
+                                                            lineHeight:"60px",
+                                                            zIndex: 10,
+                                                        }}
+                                                        >
+                                                        성인 인증이 필요합니다.
+                                                        </p>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    </div>
+                                                    ) : (
+                                                    // 성인 아니면 정상 Link
+                                                    <Link to={`/detail/${item.id}`} style={{ textDecoration: "none", position: "relative", display: "inline-block" }}>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    </Link>
+                                                )}
                                             </li>
                                         ))
                                     :
                                         searchResult.slice(0,more).map((item,index)=>(
                                             <li key={index}>
-                                                <Link to={`/detail/${item.id}`} style={{textDecoration:'none'}}>
-                                                    <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title}/>
-                                                </Link>
-                                                {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                                {item.isAdult ? (
+                                                    // 성인 콘텐츠면 클릭 시 alert, Link 이동 막기
+                                                    <div className="adultOverlay"
+                                                        onClick={() => alert("성인 인증이 필요합니다")}>
+                                                        <div className="adultOverlay"/>
+                                                        <div className="mark19">19</div>
+                                                        <p
+                                                        style={{
+                                                            position: "absolute",
+                                                            backgroundColor:"black",
+                                                            width: "100%",
+                                                            height:"60px",
+                                                            top: "50%",
+                                                            left: "50%",
+                                                            transform: "translate(-50%, -50%)",
+                                                            color: "white",
+                                                            fontSize: "14px",
+                                                            fontWeight: "600",
+                                                            textAlign: "center",
+                                                            lineHeight:"60px",
+                                                            zIndex: 10,
+                                                        }}
+                                                        >
+                                                        성인 인증이 필요합니다.
+                                                        </p>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    </div>
+                                                    ) : (
+                                                    // 성인 아니면 정상 Link
+                                                    <Link to={`/detail/${item.id}`} style={{ textDecoration: "none", position: "relative", display: "inline-block" }}>
+                                                        <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} />
+                                                    </Link>
+                                                )}
                                             </li>
                                         ))
                                     }
