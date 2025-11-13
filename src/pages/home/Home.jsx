@@ -138,7 +138,7 @@ export default function Home(){
     useEffect(()=>{
         setTimeout(()=>{
         setIsLoad(false);
-        },1500)
+        },150000)
     },[])
 
     return(
@@ -146,8 +146,11 @@ export default function Home(){
         {isLoad && 
         <div className='isLoading'>
             <div className='load-overlay'>
-                <img src='/img/buffer.png' alt='로딩 이미지' />
-                <p>불러오는 중...</p>
+                {isLoad &&
+                <div>
+                    <img src='/img/buffer.png' alt='로딩 이미지' />
+                    <p>불러오는 중...</p>
+                </div>} 
             </div>
         </div>}
 	<div>메인콘텐츠</div>
