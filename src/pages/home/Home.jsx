@@ -111,7 +111,7 @@ export default function Home(){
                                             {mov==popular ||  mov==now ? (<img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.title} className={mov == popular ? 'popimg' : ''}/>)
                                             : (<img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`} alt={item.title} />)}         
                                         </Link>
-                                        {/* {item.release_date}{item.vote_average}{item.origin_country} */}
+                                        {item.release_date}{item.vote_average}{item.origin_country}{item.popularity}
                                     </li>
                                 ): null)}
                             </ul>

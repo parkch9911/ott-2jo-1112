@@ -1,76 +1,90 @@
 .recommand-wrap {
-  width: 100%;
-  background-color: #141414;
-  color: #fff;
-  padding: 40px 0;
-  margin: 50px auto;
-  text-align: center;
+    position: relative; 
+    width: 100vw;        
+    min-height: 100vh;  
+    background-color: #141414;
+    color: #fff;
+    padding: 0;
+    margin: 50px 0;
 }
-
 .recommandresult-wrap {
-  margin-bottom: 40px;
-  position: relative;
+    margin-bottom: 40px;
+    position: relative;
 }
-
 .recommandresult-head {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-left: 50px;
-  margin-bottom: 15px;
+    display: inline-block;
+    height: 50px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    padding: 10px 20px;
+    border-left: 5px solid #e50914;
+    background: linear-gradient(to right, #e50914 0%, transparent 80%);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
 }
-
-.slider-container {
+.recommandslider-container {
+    position: relative;
+    width: calc(8 * 11vw + 7 * 15px); 
     margin: 0 auto;
-    text-align: center;
+    overflow: hidden;
+    height: 40vh;
+    padding: 5px;
 }
 
 .recommandresult-lists {
-  display: flex;
-  height: 350px;
-  width: 1580px;
-  overflow:hidden;
-  padding: 0 50px;
-  margin: 0 auto;
-  gap: 15px;
-}
+    display: flex;
+    gap: 9px; 
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
 
+}
 .recommandcard {
-  position: relative;
-  flex: 0 0 auto;
-  width: 200px;
-  height: 300px;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
+    position: relative;
+    flex: 0 0 auto;
+    transition: transform 0.3s ease;
+    border-radius: 5px;
+    overflow: hidden;
+    display: block;
+    height: 330px;
 }
-
 .recommandcard:hover {
-  transform: scale(1.05);
-  z-index: 10;
+    transform: scale(1.05);
+    z-index: 10;
 }
-
 .recommandposter {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* 이미지 비율 유지 */
-  background-color: #000;
-  border-radius: 10px;
+    width: 98%;
+    height: 98%;
+    object-fit: contain;
+    border-radius: 1.5em;
 }
-
-.recommandslide-btn {
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(20, 20, 20, 0.7);
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 0 12px;
-  border-radius: 50%;
-  transition: background 0.2s;
+.recommandleft-arrow:before {
+    content: "\276E";
 }
-
-.recommandslide-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.recommandright-arrow:before {
+    content: "\276F";
 }
-
+.recommandleft-arrow {
+   left: 1vw;
+}
+.recommandright-arrow {
+    right: 1vw;
+}
+.recommandleft-arrow,
+.recommandright-arrow {
+    position: absolute;
+    cursor: pointer;
+    font-size: 4em;
+    top: 48%;
+    transform: translateY(-25%);
+    text-shadow: 5px 5px 5px #252525;
+    z-index: 10;
+    user-select: none;
+}
+.recommandleft-arrow:hover,
+.recommandright-arrow:hover {
+    opacity: 0.8;
+}

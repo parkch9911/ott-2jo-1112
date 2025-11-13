@@ -39,7 +39,7 @@ export default function InputPage() {
     fetchTarget(randomCategory.endpoint)
       .then((data) => {
         setRecommendList(data);
-        setRecommendTitle(`추천 컨텐츠 - ${randomCategory.name}`);
+        setRecommendTitle(`추천 컨텐츠 : ${randomCategory.name}`);
       })
       .catch((err) => console.error("랜덤 추천 fetch 실패:", err));
   };
@@ -96,7 +96,7 @@ export default function InputPage() {
     fetchTarget(endpoint)
       .then((data) => {
         setRecommendList(data);
-        setRecommendTitle(`추천 컨텐츠 - ${name}`);
+        setRecommendTitle(`추천 컨텐츠 : ${name}`);
       })
       .catch((err) => console.error("카테고리 fetch 실패:", err));
   };
@@ -121,7 +121,7 @@ export default function InputPage() {
         {recommendList.map((item) => (
           <Link to={`/detail/${item.id}`} key={item.id}>
             <img
-              src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
               alt={item.title || item.name}
               width="200"
             />
@@ -144,7 +144,7 @@ export default function InputPage() {
             {searchResults.map((item) => (
               <Link to={`/detail/${item.id}`} key={item.id}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
                   alt={item.title || item.name}
                   width="200"
                 />
@@ -162,12 +162,12 @@ export default function InputPage() {
 
             return (
               <div key={genreName}>
-                <p className="result-head">연관 장르: {genreName}</p>
+                <p className="result-head">연관 장르 : {genreName}</p>
                 <div className="result-lists">
                   {genreItems.map((item) => (
                     <Link to={`/detail/${item.id}`} key={item.id}>
                       <img
-                        src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                         alt={item.title || item.name}
                         width="200"
                       />
@@ -183,10 +183,13 @@ export default function InputPage() {
 
     // 검색 결과가 없을 때
     return (
-      <div className="search-results">
-        <p className="result-head">검색 결과가 없습니다</p>
+      <>
+        <div className="search-results">
+          <p className="result-head">검색 결과가 없습니다</p>
+        </div>
         {renderRecommend()}
-      </div>
+      </>
+
     );
   };
 

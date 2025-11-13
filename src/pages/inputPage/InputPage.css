@@ -5,8 +5,7 @@
     align-items: center;
     padding: 40px 20px;
     background-color: #141414;
-    color: white;
-    min-height: 200px;
+    color: #fff;
 }
 
 .inputandBtn {
@@ -56,15 +55,12 @@
     justify-content: center;
     gap: 8px;
 }
-.result-wrap,
-.recommend-wrap,
-.search-results {
-    max-width: 1400px;
-    margin: 50px auto;
-    padding: 0;
-    color: white;
-}
 
+.result-wrap,
+.recommend-wrap, .search-results{
+    width: 100%;
+    padding: 50px;
+}
 .result-head {
     display: inline-block;
     height: 50px;
