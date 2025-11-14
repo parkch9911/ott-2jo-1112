@@ -127,6 +127,7 @@
 }
 .movie-box-middle button:hover{
     background-color: rgb(131, 17, 17);
+    cursor: pointer;
 }
 .movie-detail{
     padding: 30px;
@@ -173,6 +174,7 @@
     margin: 30px 0;
     margin-left: 30px;
     font-size: 16px;
+    cursor: pointer;
 }
 /* 홈버튼 */
 .detail-backBtn-box .homeBtn{
@@ -224,7 +226,23 @@
 }
 .detail-right-ul li img:hover{
     transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
 }
 .playMovie{
     cursor: pointer;
 }
+.another-movie .reload{
+    position: absolute;
+    top: 185px;
+    right: 220px;
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    color: gray;
+    transition: 0.2s;
+}
+.another-movie .reload:hover{
+    color: rgb(209, 209, 209);
+    transform: scale(1.1);
+}
+

@@ -51,21 +51,21 @@ const {user1,user2,user3}=useContext(LoginContext)
             <div className="wish-lists">
               {user1? wishMovies1.length > 0?(wishMovies1.map((item)=>(
                  <div className="wish-item" key={item.id}>
-                  <Link to={`/detail/${item.id}`}><img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`}/></Link>
+                  <Link to={`/detail/${item.id}`}><img src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}/></Link>
                   <p>{item.title || item.name}</p>
                 </div>
               ))):<h2 className="wish-noItem">아직 추가하신 목록이 없습니다.</h2>
               :
               user2? wishMovies2.length > 0?(wishMovies2.map((item)=>(
                  <div className="wish-item" key={item.id}>
-                  <Link to={`/detail/${item.id}`}><img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`}/></Link>
+                  <Link to={`/detail/${item.id}`}><img src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}/></Link>
                   <p>{item.title || item.name}</p>
                 </div>
               ))):<h2 className="wish-noItem">아직 추가하신 목록이 없습니다.</h2>
               :
               user3? wishMovies3.length > 0?(wishMovies3.map((item)=>(
                  <div className="wish-item" key={item.id}>
-                  <Link to={`/detail/${item.id}`}><img src={`https://image.tmdb.org/t/p/w300${item.backdrop_path}`}/></Link>
+                  <Link to={`/detail/${item.id}`}><img src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}/></Link>
                   <p>{item.title || item.name}</p>
                 </div>
               ))):<h2 className="wish-noItem">아직 추가하신 목록이 없습니다.</h2>

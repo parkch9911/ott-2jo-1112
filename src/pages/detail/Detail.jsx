@@ -9,9 +9,10 @@ import { useContext } from "react";
 import { WishContext } from "../../context/WishContext";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import hd from '../../assets/img/hd.png'
 
 export default function Detail(){
-
+    
 const navi=useNavigate();
 
 const {user1,user2,user3}=useContext(LoginContext)
@@ -30,17 +31,25 @@ const {addwish1,isinwish1,removewish1,
       });
   }, []);
 
+    //랜덤으로 추천콘텐츠뜨게
+    //오른쪽 랜덤나오는거 빈값두고 
+    // 랜덤아이템에 복사본 10개 잘라서 넣기. 그리고 랜덤에 들어갈거는 movies가 로드될때만  
     const [shuffle,setShuffle]=useState([])
         useEffect(()=>{
         const getRandomItem = [...movies].sort(() => Math.random() - 0.5);
         const random10 = getRandomItem.slice(0, 10); // 앞에서 10개만 추출
         setShuffle(random10)},[movies]);
-        console.log(shuffle)
 
+    //새로고침
+    const reload =()=>{
+        const reloadshuffle = [...movies].sort(() => Math.random() - 0.5);
+        const reloading = reloadshuffle.slice(0, 10);
+        setShuffle(reloading)
+    }
+    
   const{id} = useParams()
 // 전에는 JSON에서 보내온 전체의 배열 중 find를 썼는데 이번엔 fetchAll 이용해서 아이디 일치하는거 찾아야함
 const item = movies.find((item)=>item.id === Number(id))
-
 
 const {genreMap}=useContext(SearchContext)
 
@@ -72,7 +81,7 @@ const {genreMap}=useContext(SearchContext)
                                 <p className="middle-vote"><i className="fa-solid fa-star"></i> {(item.vote_average).toFixed(1)} <em>({item.vote_count})</em></p>
                                 <div className="hdline">
                                     <span className="middle-open">개봉일자 : {item.first_air_date || item.release_date}</span>
-                                    <img src="../../public/img/hd.png" alt="HD"/>
+                                    <img src={hd} alt="HD"/>
                                 </div>
                             </div>
                             <button type="button" className="playMovie">▶︎ 재생하기</button>
@@ -97,6 +106,7 @@ const {genreMap}=useContext(SearchContext)
                 </div>
                 <div className="another-movie">
                     <p>추천 콘텐츠</p>
+                    <button className="reload" onClick={reload}><i class="fa-solid fa-arrow-rotate-right"></i></button>
                     {/* 맵 돌려서 넣어야겟지 */}
                     <ul className="detail-right-ul">
                         {shuffle.map((item)=>(

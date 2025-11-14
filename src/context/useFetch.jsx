@@ -6,7 +6,15 @@ export const endpoints = {
   moviePopular: `movie/popular?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE&language=ko-KR&page=1`,
   movieNowPlaying: `movie/now_playing?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE&language=ko-KR&page=2`,
   movieUpcoming: `movie/upcoming?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE&language=ko-KR&page=1`,
-  movieKorea: `discover/movie?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE&include_adult=false&with_original_language=ko&language=ko-KR&page=1`,
+  movieKorea: `discover/movie
+?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE
+&include_adult=false
+&with_original_language=ko
+&language=ko-KR
+&certification_country=KR
+&certification.lte=15
+&sort_by=popularity.desc
+&page=1`,
   movieJapan: `discover/movie?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE&include_adult=false&with_original_language=ja&language=ko-KR&page=1`,
   movieAdult: `discover/movie?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE&include_adult=true&language=ko-KR&page=3`,
   movieAnime: `discover/movie?api_key=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTJkZDljZGMxZDZkOTdmMzdmOTM2M2I1YjQ2Y2Q5ZSIsIm5iZiI6MTc2MjczNzIzNS4wNDYwMDAyLCJzdWIiOiI2OTExM2M1M2EwN2VkOTNmMDdkZDIxYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.p2iccSA5DomqKuUUIDJeSLiWkyPRMANa6G3avvEk8HE&with_genres=16&language=ko-KR&page=1`,
@@ -33,7 +41,14 @@ export function fetchTarget(endpoint) {
     },
   })
     .then((res) => res.json())
-    .then((data) => data.results || [])
+    .then((data) => {
+      const results = data.results || [];
+
+        //backdrop_path 또는 poster_path 중 하나라도 없으면 제외
+        return results.filter(
+          (item) => item.backdrop_path && item.poster_path &&  item.id !== 1231813 && item.id !== 278635 && item.id !== 1374686 && item.id !== 257161 && item.id !== 105660 && item.id !== 1015552 && item.id !== 1355783 && item.id !== 293530 && item.id !== 784755 && item.id !== 1215106 && item.id !== 1523160
+      );}
+  )
     .catch((err) => {
       console.error(`TMDB fetch error [${endpoint}]:`, err);
       return [];

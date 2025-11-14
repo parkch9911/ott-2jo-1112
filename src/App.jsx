@@ -1,5 +1,5 @@
 import LoginPage from './Common/login.jsx'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, ScrollRestoration } from 'react-router-dom'
 import LoginProvider from './context/LoginContext.jsx'
 import SelectProfile from "./pages/selectProfile/SelectProfile.jsx"
 import Footer from './common/Footer.jsx'
@@ -15,8 +15,15 @@ import SearchProvider from './context/SearchContext.jsx'
 import WishProvider from './context/WishContext.jsx'
 import InputPage from './pages/inputPage/InputPage.jsx'
 import Recommand from './pages/recommand/Recommand.jsx'
+import { useEffect } from 'react'
 
 function App() {
+
+useEffect(()=>{
+  window.history.scrollRestoration=
+  'manual';
+},[])
+
 
   return (
     <DataProvider>

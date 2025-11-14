@@ -54,7 +54,9 @@
 .recommandcard:hover {
     transform: scale(1.05);
     z-index: 10;
+    
 }
+
 .recommandposter {
     width: 98%;
     height: 98%;

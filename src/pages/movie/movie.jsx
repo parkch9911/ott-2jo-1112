@@ -31,10 +31,10 @@ export default function Movie(){
     //메인배너 정보 불러오기
     const mainBanner = [...movies].filter(movie => movie.id === 1306525 || movie.id === 1062722 || movie.id === 496243 || movie.id === 1218925 || movie.id === 1242898);
 
-    useEffect(() => {
+   useEffect(() => {
         fetchAll()
         .then((data) => {
-            const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1523160 && movie.title);
+            const data2 = [...data].filter((movie)=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1523160 && movie.title && movie.release_date);
             setMovies(data2);
             setList(data2);
             setMore(21);
@@ -87,7 +87,7 @@ export default function Movie(){
         }
     }
 
-    const searchChange = (val) =>{
+           const searchChange = (val) =>{
         const array=[];
         setChecked(null);
         setSearchClick(false);
@@ -99,14 +99,17 @@ export default function Movie(){
         setTitle(val);
 
         const copyData = [...movies];
-        //인풋select에 선택된 값이 all이 아닐경우 해당 값과 동일한 data 카테고리로 필터링
+
         if(val !== 'ALL'){
-            const filtering = [...copyData].filter((item)=>(item.genre_ids?.includes(Number(val)) || item.origin_country?.includes(val.toUpperCase())));
+            const filtering = [...copyData].filter(
+                (item)=>
+                    item.genre_ids?.includes(Number(val)) || 
+                    item.original_language === val // 언어 필터 적용
+            );
             setList(filtering);
         }else{
             setList(copyData);
-        }
-                 
+        }     
     }
 
     const searching = () =>{
@@ -225,14 +228,14 @@ export default function Movie(){
                                 <option value="37">서부</option>
                             </select>
 
-                            <label htmlFor="country">나라별</label>
-                            <select name="country" id="country" onChange={(e)=>searchChange(e.target.value)} value={inputVal}>
+                            <label htmlFor="language">언어별</label>
+                            <select name="language" id="language" onChange={(e)=>searchChange(e.target.value)} value={inputVal}>
                                 <option value="ALL">전체</option>
-                                <option value="us">미국</option>
-                                <option value="kr">한국</option>
-                                <option value="cn">중국</option>
-                                <option value="jp">일본</option>
-                            </select>                    
+                                <option value="en">영어</option>
+                                <option value="ko">한국어</option>
+                                <option value="zh">중국어</option>
+                                <option value="ja">일본어</option>
+                            </select>           
                             
                             <button type="button" onClick={()=>{listSort('release_date');checkHandler(1);}}><span className="check">{checked === 1 ? <i className="fa-solid fa-check"></i> : null}</span> 최신순</button>
                             <button type="button" onClick={()=>{listSort('vote_average');checkHandler(2);}}><span className="check">{checked === 2 ? <i className="fa-solid fa-check"></i> : null}</span> 평점순</button>
@@ -249,7 +252,35 @@ export default function Movie(){
                         {/* 검색을 안했을때 전체영화 */}
                         {searchClick === false && (searchResult === null || searchResult === undefined || searchResult.length === 0) ?
                             <>
-                                <h4>{title==='ALL'?'전체영화':title==='28'?'액션':title==='12'?'모험':title==='16'?'애니메이션':title==='35'?'코미디':title==='80'?'범죄':title==='99'?'다큐멘터리':title==='18'?'드라마':title==='10751'?'가족':title==='14'?'판타지':title==='36'?'역사':title==='27'?'공포':title==='10402'?'음악':title==='9648'?'미스터리':title==='10749'?'로맨스':title==='878'?'SF':title==='10770'?'TV영화':title==='53'?'스릴러':title==='10752'?'전쟁':title==='37'?'서부':title==='us'?'미국':title==='kr'?'한국':title==='cn'?'중국':title==='jp'?'일본':'전체영화'}</h4>
+                                <h4>
+                                    {
+                                    title === 'ALL' ? '전체영화' :
+                                    title === '28' ? '액션' :
+                                    title === '12' ? '모험' :
+                                    title === '16' ? '애니메이션' :
+                                    title === '35' ? '코미디' :
+                                    title === '80' ? '범죄' :
+                                    title === '99' ? '다큐멘터리' :
+                                    title === '18' ? '드라마' :
+                                    title === '10751' ? '가족' :
+                                    title === '14' ? '판타지' :
+                                    title === '36' ? '역사' :
+                                    title === '27' ? '공포' :
+                                    title === '10402' ? '음악' :
+                                    title === '9648' ? '미스터리' :
+                                    title === '10749' ? '로맨스' :
+                                    title === '878' ? 'SF' :
+                                    title === '10770' ? 'TV영화' :
+                                    title === '53' ? '스릴러' :
+                                    title === '10752' ? '전쟁' :
+                                    title === '37' ? '서부' :
+                                    title === 'en' ? '영어' :
+                                    title === 'ko' ? '한국어' :
+                                    title === 'zh' ? '중국어' :
+                                    title === 'ja' ? '일본어' :
+                                    '전체영화'
+                                    }
+                                </h4>
                                 <p className="movieNum">{list.length === 0 ? '' : `총 ${list.length}개의 영화가 있습니다.`}</p>
                                 <ul>
                                     {list.slice(0,more).map((item,index)=>(

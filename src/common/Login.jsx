@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import './common.css'
 import { LoginContext } from "../context/LoginContext";
 import { useContext } from "react";
+import Nlogo from '../assets/img/Netflix_N.png'
+import logoLong from '../assets/img/logoLong.png'
 
 export default function LoginPage(){
 
@@ -14,7 +16,7 @@ export default function LoginPage(){
     const navigate = useNavigate();
 
     const loginHandler = ()=>{
-        if(id==='2@naver.com'||'01022222222' && pw==='1234'){
+        if(id==='1234' && pw==='1234'){
             login(id)
             alert('로그인 되었습니다.')
             navigate('/selectProfile')
@@ -28,9 +30,9 @@ export default function LoginPage(){
     return(
         <>
             <div className="background-img">
-                <Link to='/'><img className="toplogo" src="../../public/img/logoLong.png"/></Link>
+                <Link to='/'><img className="toplogo" src={logoLong}/></Link>
                 <form onSubmit={loginHandler} className="login-form">
-                    <img className="logo" src='../../public/img/Netflix_N.png'/>
+                    <img className="logo" src={Nlogo}/>
                     <h1 className="loglogo">로그인</h1>
                     <input type="text"
                      placeholder="이메일 주소 또는 휴대폰 번호"

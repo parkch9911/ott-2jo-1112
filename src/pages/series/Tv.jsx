@@ -22,29 +22,26 @@ export default function Tv() {
   // 메인 배너에 쓸 TV 시리즈 ID 지정
   const mainBanner = [...tvShows].filter(
     (tv) =>
-      tv.id === 293613 ||
-      tv.id === 66732 ||
-      tv.id === 255719 ||
-      tv.id === 99966 ||
-      tv.id === 2190
+      tv.id === 1396 ||
+      tv.id === 209867 ||
+      tv.id === 70785 ||
+      tv.id === 2734 ||
+      tv.id === 1416
   );
 
-  useEffect(() => {
+useEffect(() => {
     fetchAll()
       .then((data) => {
         const filtered = [...data].filter(
-          (tv) => tv.id !== 196902 && tv.id !== 125988 && tv.id !== 100088
-        );
+          (tv) => tv.name && tv.first_air_date && tv.isAdult===false && tv.adult===false && tv.id !== 278635 && tv.id !== 1374686 && tv.id !== 257161 && tv.id !== 105660 && tv.id !== 1015552 && tv.id !== 1355783 && tv.id !== 293530 && tv.id !== 784755 && tv.id !== 1523160 && tv.id !== 196902 && tv.id !== 125988 && tv.id !== 100088);
 
-        setTvShows(data.filter(
-          (item) => item.name && item.id !== 278635 && item.id !== 1374686 && item.id !== 257161 && item.id !== 105660 && item.id !== 1015552 && item.id !== 1355783 && item.id !== 293530 && item.id !== 784755 && item.id !== 1523160))
+        setTvShows(filtered);
         setList(filtered);
         setMore(21);
         setCurrent(0);
       })
       .catch((err) => console.error("TV 데이터 불러오기 실패:", err));
   }, []);
-  
 
 
 

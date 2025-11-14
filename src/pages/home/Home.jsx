@@ -6,6 +6,7 @@ import { LoginContext } from "../../context/LoginContext";
 import { WishContext } from "../../context/WishContext";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import buffer from '../../assets/img/buffer.png'
 
 
 
@@ -22,7 +23,7 @@ export default function Home(){
     useEffect(() => {
         fetchAll()
         .then((data) => {
-            const data2 = [...data].filter(movie=> movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1215106 && movie.id !== 1523160);
+            const data2 = [...data].filter(movie=> movie.id !== 1231813 && movie.id !== 278635 && movie.id !== 1374686 && movie.id !== 257161 && movie.id !== 105660 && movie.id !== 1015552 && movie.id !== 1355783 && movie.id !== 293530 && movie.id !== 784755 && movie.id !== 1215106 && movie.id !== 1523160);
             setMovies(data2);
             setCurrent2(0);
         })
@@ -133,7 +134,7 @@ export default function Home(){
         return () => clearInterval(interval);
     }); 
 
-    
+    //불러오는중 창 셋타임
     const [isLoad,setIsLoad]=useState(true);
     useEffect(()=>{
         setTimeout(()=>{
@@ -147,13 +148,13 @@ export default function Home(){
         <div className='isLoading'>
             <div className='load-overlay'>
                 {isLoad &&<div className="load-content">
-                    <img src='/img/buffer.png' alt='로딩 이미지' />
+                    <img src={buffer} alt='로딩 이미지' />
                     <p>불러오는 중...</p>
                 </div>}
             </div>
         </div>}
 	<div>메인콘텐츠</div>
-        <div className="main-container">
+        <div className="main-container main">
             <div className="banner">
                 <div className="main-banner">
                     {mainBanner.map((item,index)=>(
@@ -180,7 +181,7 @@ export default function Home(){
                 <div className="main-contents" key={index}>
                     {mov.length !== 0 ?(
                         <div className="contents-wrap">
-                            <h4>{mov==popular ? '인기작 TOP 20' : mov==now ? '현재 상영작' : mov==vote ? '높은 평점순' : mov==us ? '헐리웃 영화' : mov==jjim ? '내가 찜한 영화' : ''}</h4>
+                            <h4 style={mov==popular ? {marginBottom: '40px'} : null }>{mov==popular ? '인기작 TOP 20' : mov==now ? '현재 상영작' : mov==vote ? '높은 평점순' : mov==us ? '헐리웃 영화' : mov==jjim ? '내가 찜한 영화' : ''}</h4>
                             {/* 30%씩 슬라이드 이동 */}
                             <ul style={{transform: mov == popular || mov==now ? `translateX(-${(current[index] * 100)/3.33}%)` : `translateX(-${current[index] * 1823}px)`  }} className={mov == popular || mov==now ? 'popul' : 'garo'}>
                                 {mov.slice(0,20).map((item,i)=> item.length !== 0 ?(
@@ -289,6 +290,7 @@ export default function Home(){
                                          </>   
                                         )}
                                         {/* {item.release_date}{item.vote_average}{item.origin_country}{item.popularity} */}
+                                        {mov === vote || mov === us || mov=== jjim ? <p className="title">{item.name || item. title}</p> : null}
                                     </li>
                                 ): null)}
                             </ul>

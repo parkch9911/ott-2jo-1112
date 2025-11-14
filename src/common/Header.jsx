@@ -4,6 +4,12 @@ import { SearchContext } from "../context/SearchContext";
 
 import { LoginContext } from "../context/LoginContext";
 import { Link } from "react-router-dom";
+import logoLong from '../assets/img/logoLong.png'
+import profile1 from '../assets/img/profileImg.png'
+import profile2 from '../assets/img/profileImg2.png'
+import profile3 from '../assets/img/profileImg3.png'
+
+
 
 
 export default function Header() {
@@ -31,7 +37,7 @@ export default function Header() {
         <div className="header-wrap">
             <header className="header">
                 <div className="header-left">
-                    <Link to='/home'><img src="../../public/img/logoLong.png" /></Link>
+                    <Link to='/home'><img src={logoLong} /></Link>
                     <nav className="menu">
                     <Link to='/home'>홈</Link>
                     <Link to='/tv'>시리즈</Link>
@@ -66,9 +72,9 @@ export default function Header() {
                             {user1 ? (
                                     <p>최근 알림 메세지가 없습니다.</p>
                                 ) : user2 ? (
-                                    <p>잠깐, 찜 목록 확인해볼까요?</p>
+                                    <p>김성중님, 반갑습니다.</p>
                                 ) : user3 ? (
-                                    <p>찜 목록이 비어 있어요. 좋아하는 콘텐츠를 찾아보세요!</p>
+                                    <p>원하는 콘텐츠가 있으신가요?</p>
                                 ) : null}
                         </div>
                     </div>
@@ -76,18 +82,18 @@ export default function Header() {
                         {user1?
                         <img
                             className="profile-img-main"
-                            src="../../public/img/profileImg.png"
-                            alt="profile"
+                            src={profile1}
+                            alt="profile1"
                         />:
                         user2?<img
                             className="profile-img-main"
-                            src="../../public/img/profileImg2.png"
-                            alt="profile"
+                            src={profile2}
+                            alt="profile2"
                         />:
                         user3?<img
                             className="profile-img-main"
-                            src="../../public/img/profileImg3.png"
-                            alt="profile"
+                            src={profile3}
+                            alt="profile3"
                         />:null}
                         <span className={modalOn?'spinTab':'basicTab'}  >▼</span>
                         {/* 프로필 모달 */}
@@ -100,8 +106,8 @@ export default function Header() {
                                     <div className="profile-indiviual" onClick={()=>{user2click();changeUser();}}>
                                         <img
                                             className="profile-img-menu"
-                                            src="../../public/img/profileImg2.png"
-                                            alt="profile1"
+                                            src={profile2}
+                                            alt="profile2"
                                         />
                                         <span className="username">성중님</span>
                                     </div>
@@ -111,7 +117,7 @@ export default function Header() {
                                     <div className="profile-indiviual" onClick={()=>{user1click();changeUser();}}>
                                         <img
                                             className="profile-img-menu"
-                                            src="../../public/img/profileImg.png"
+                                            src={profile1}
                                             alt="profile1"
                                         />
                                         <span className="username">찬하님</span>
@@ -122,7 +128,7 @@ export default function Header() {
                                     <div className="profile-indiviual" onClick={()=>{user1click();changeUser();}}>
                                         <img
                                             className="profile-img-menu"
-                                            src="../../public/img/profileImg.png"
+                                            src={profile1}
                                             alt="profile1"
                                         />
                                         <span className="username">찬하님</span>
@@ -135,8 +141,8 @@ export default function Header() {
                                     <div className="profile-indiviual" onClick={()=>{user3click();changeUser();}}>
                                         <img
                                             className="profile-img-menu"
-                                            src="../../public/img/profileImg3.png"
-                                            alt="profile1"
+                                            src={profile3}
+                                            alt="profile3"
                                         />
                                         <span className="username">동현님</span>
                                     </div>
@@ -146,8 +152,8 @@ export default function Header() {
                                     <div className="profile-indiviual" onClick={()=>{user3click();changeUser();}}>
                                         <img
                                             className="profile-img-menu"
-                                            src="../../public/img/profileImg3.png"
-                                            alt="profile1"
+                                            src={profile3}
+                                            alt="profile3"
                                         />
                                         <span className="username">동현님</span>
                                     </div>
@@ -157,8 +163,8 @@ export default function Header() {
                                     <div className="profile-indiviual" onClick={()=>{user2click();changeUser();}}>
                                         <img
                                             className="profile-img-menu"
-                                            src="../../public/img/profileImg2.png"
-                                            alt="profile1"
+                                            src={profile2}
+                                            alt="profile2"
                                         />
                                         <span className="username">성중님</span>
                                     </div>

@@ -20,7 +20,7 @@ body{
     height: 1000px;
     width: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), 
-    url('../../public/img/backg.jpg') center/cover no-repeat;
+    url('../assets/img/backg.jpg') center/cover no-repeat;
 }
 .toplogo{
     position: absolute;
@@ -185,10 +185,10 @@ body{
     margin-bottom: 40px;
 
 }
-.footer-icons .ficon{
+.footer-icons svg{
     cursor: pointer;
     transition: 0.3s;
 }
-.footer-icons .ficon:hover{
+.footer-icons svg:hover{
     transform: scale(1.3);
 }

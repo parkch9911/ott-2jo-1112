@@ -40,6 +40,7 @@
 }
 .wish-item a img:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
 }
 .wish-btn{
     width: 1400px;
@@ -65,9 +66,11 @@
 }
 .wish-btn .wish-back:hover{
     background-color: rgb(146, 17, 17);
+    cursor: pointer;
 }
 .wish-dele:hover{
     background-color: rgb(36, 36, 36);
+    cursor: pointer;
 }
 /* 아직 아무것도 없을 때  */
 .wish-noItem{
@@ -117,9 +120,11 @@
     border: 1px solid red;
     background-color: transparent;
     color: red;
+    
 }
 .delbtnbox .yesbtn:hover{
     background-color: rgb(36, 36, 36);
+    cursor: pointer;
 }
 .delbtnbox .nobtn{
     background-color: red;
@@ -127,4 +132,6 @@
 }
 .delbtnbox .nobtn:hover{
     background-color: rgb(146, 17, 17);
+    cursor: pointer;
 }
+
